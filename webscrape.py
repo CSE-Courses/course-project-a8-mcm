@@ -18,7 +18,7 @@ def get_url():
     # Get input of the stock that needs to be looked up
     stock = input("Type name of stock to look up: ")
     url = base_url + stock + "/history?p=" + stock + "&tsrc=find-tre-srch"
-    return url
+    return url.lower()
 
 """
     current_price(url):
@@ -33,4 +33,6 @@ def current_price(url):
     else:
         for price in results:
             return price
+        
+print(current_price("https://finance.yahoo.com/quote/agaij/history?p=agaij&tsrc=find-tre-srch"))
         
