@@ -129,4 +129,16 @@ def get_data_close(url):
     for data in nice_data:
         close_price.append(data[4])
     return close_price
+
+
+"""
+    get_company_name(url):
+        Will return the company name of the stock that was searched in url.
+"""
+def get_company_name(url):
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'lxml')
+    results = soup.find('h1', class_ = 'D(ib) Fz(18px)')
+    for name in results:
+        return name
     
