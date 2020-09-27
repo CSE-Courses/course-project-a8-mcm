@@ -130,6 +130,18 @@ def get_data_close(url):
         close_price.append(data[4])
     return close_price
 
+"""
+    get_data_vol(url):
+        Uses get_data_nodiv(url) function to get all the volumes of the data 
+        provided. Returns a list of volume prices.
+"""
+def get_data_vol(url):
+    nice_data = get_data_nodiv(url)
+    vol_price = []
+    
+    for data in nice_data:
+        vol_price.append(data[6])
+    return vol_price
 
 """
     get_company_name(url):
