@@ -117,5 +117,16 @@ def get_data_open(url):
         open_price.append(data[1])
     return open_price
 
-
+"""
+    get_data_close(url):
+        Uses get_data_nodiv(url) function to get all the close prices of the data 
+        provided. Returns a list of closing prices.
+"""
+def get_data_close(url):
+    nice_data = get_data_nodiv(url)
+    close_price = []
+    
+    for data in nice_data:
+        close_price.append(data[4])
+    return close_price
     
