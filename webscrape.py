@@ -9,14 +9,13 @@ import requests
 from bs4 import BeautifulSoup
 
 """
-    get_url():
-        Asks user for stock they want to look up. Will return the url for 
-        webscraping.
+    get_url(stock):
+        Looks up the url that was given as an arugment. The argument has to be a string.
+        Will return the url for webscraping.
 """
-def get_url():
+def get_url(stock):
     base_url = "https://finance.yahoo.com/quote/"
-    # Get input of the stock that needs to be looked up
-    stock = input("Type name of stock to look up: ")
+    # Get input of the stock that needs to be looked up. Most likely will be changed
     url = base_url + stock + "/history?p=" + stock + "&tsrc=find-tre-srch"
     return url.lower()
 
@@ -34,5 +33,89 @@ def current_price(url):
         for price in results:
             return price
         
-print(current_price("https://finance.yahoo.com/quote/agaij/history?p=agaij&tsrc=find-tre-srch"))
-        
+"""
+    history_data(url):
+        Requests access to yahoo finance history table and returns the table in
+        text. This function is used for table manipulations.
+"""
+def history_data(url):
+    page = requests.get(url).text
+    soup = BeautifulSoup(page, 'lxml')
+    history_table = soup.find('table', class_='W(100%) M(0)')
+    
+    return history_table
+
+"""
+    get_header(url):
+        Uses history_data(url) function and return a list of headers.
+"""
+def get_header(url):
+    history_table = history_data(url)
+    history_table_heading = history_table.thead.find_all("tr")
+    
+    headings = []
+    for heading in history_table_heading:
+        headings.append(heading.get_text(separator='| '))
+    headings = headings[0].split('| ')
+    return headings
+
+"""
+    get_data(url):
+        Uses history_data(url) function to get the body data and store each 
+        row as a sublist. Returns a list.
+"""
+def get_data(url):
+    history_table = history_data(url)
+    history_table_data = history_table.tbody.find_all("tr")
+    datas = []
+    nice_data = []
+    
+    for data in history_table_data:
+        datas.append(data.get_text(separator='| '))
+    for data in datas:
+        nice_data.append(data.split('| '))
+    return nice_data
+
+"""
+    get_data_nodiv(url):
+        Returns a list of data that doesn't include dividends.
+"""
+def get_data_nodiv(url):
+    nice_data = get_data(url)
+    no_div = []
+    
+    for data in nice_data:
+        if (data[3] =='Dividend'):
+            continue
+        else:
+            no_div.append(data)
+    return no_div
+
+"""
+    get_data_date(url):
+        Uses get_data_nodiv(url) function to get all the dates the data 
+        provides from get_data_nodiv(url). Returns a list of date prices.
+"""
+def get_data_date(url):
+    nice_data = get_data_nodiv(url)
+    dates = []
+    
+    for data in nice_data:
+        dates.append(data[0])
+    return dates
+
+"""
+    get_data_open(url):
+        Uses get_data_nodiv(url) function to get all the open prices of the data 
+        provided. Returns a list of open prices.
+"""
+def get_data_open(url):
+    nice_data = get_data_nodiv(url)
+    open_price = []
+    
+    for data in nice_data:
+        open_price.append(data[1])
+    return open_price
+
+
+    
