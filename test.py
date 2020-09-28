@@ -50,10 +50,10 @@ def pygameDemo():
                 exit(0)
         pygame.display.flip()
 
-helloWorld()
+#helloWorld()
 forLoopAndList()
-fiblist=[0,1]
-print(recursionDemo(fiblist,5))
+#fiblist=[0,1]
+#print(recursionDemo(fiblist,5))
 
 class tests(unittest.TestCase):
     def test0(self):
