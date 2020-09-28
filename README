@@ -1,1 +1,7 @@
-** CSE 442 - MCM **
+CSE 442 - MCM
+The project uses artificial intelligence to give prediction in stock prices.
+
+Features:
+Search for stocks and favorite them.
+View graphs and see predicted results made by the AI.
+View the raw data of the stock in a table.
