@@ -2,13 +2,21 @@ import pygame
 from pygame.locals import *
 from Search import *
 
+"""
+@Authors: Musaiyab Ali, David Forrest
+The temporary main class and function that controls the entire program. The MainMenu class is used to create and hold certain
+variables that will be used in multiple methods. For now, there's only one method that serves to display the UI and call the back-end
+methods to add the functionalities.
+"""
+
 class MainMenu:
     #default sizes for screen resolution
     screenWid=1280
     screenLen=720
 
-    #whether user clicked in the search bar or not
+    #checker variables to keep track of states
     insearchbar=0
+    hamState=0
 
     #the text the user is inputing into the search bar
     searchbarText=""
@@ -35,6 +43,9 @@ class MainMenu:
         #button and font for search bar
         searchBarButton, searchBarFont = searchBarInitalize()
 
+        #favorites menu
+        favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+
         #screen while program is running
         while True:
             #clears the screen
@@ -52,6 +63,14 @@ class MainMenu:
             #render search bar text
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
             screen.blit(searchtext,(200,15))
+            
+            if self.hamState==1:
+                screen.blit(favMenu, (0,0))
+                
+            #render hidden buttons
+            hamHidden=pygame.Rect(0,0,100,100)
+
+            #updates the screen
             pygame.display.update()
 
             #event handler loop
@@ -61,9 +80,17 @@ class MainMenu:
                     print("Exiting Window")
                     pygame.quit() 
                     exit(0)
-                
+
+                #if user clicked hamburger icon
+                if event.type==pygame.MOUSEBUTTONDOWN:
+                    if hamHidden.collidepoint(event.pos):
+                        if self.hamState==0:
+                            self.hamState=1
+                        else:
+                            self.hamState=0
+ 
                 #whether user clicked into search bar
-                if event.type== pygame.MOUSEBUTTONDOWN:
+                if event.type==pygame.MOUSEBUTTONDOWN:
                     if searchBarButton.collidepoint(event.pos):
                         self.insearchbar=1
                     else:
@@ -79,6 +106,6 @@ class MainMenu:
             
 
 
-
+#calls the method to run the program
 test=MainMenu()
 test.menuInit()
