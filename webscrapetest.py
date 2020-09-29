@@ -83,6 +83,22 @@ class TestWebScape(unittest.TestCase):
         self.assertEqual(get_company_name(
             "https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch"), 
             "Apple Inc. (AAPL)")
+        
+    # Test getting the high prices
+    def test_get_high_prices(self):
+        high = get_data_high("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
+        self.assertEqual(high[0], '9.90')
+        
+    # Test getting the low prices
+    def test_get_low_prices(self):
+        low = get_data_low("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
+        self.assertEqual(low[0], '9.73')
+        
+    # Test getting adjclose prices
+    def test_get_adjprices(self):
+        adj = get_data_adjclose("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
+        self.assertEqual(adj[0], '9.85')
+        
             
 if __name__ == '__main__':
     unittest.main()

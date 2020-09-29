@@ -6,6 +6,7 @@ Created on Mon Sep 21 16:25:58 2020
 Webscraping finance.yahoo.com
 """
 import requests
+import csv
 from bs4 import BeautifulSoup
 
 """
@@ -129,6 +130,19 @@ def get_data_close(url):
     for data in nice_data:
         close_price.append(data[4])
     return close_price
+
+"""
+    get_data_high(url):
+        Uses get_data_nodiv(url) function to get all the high open prices of the data 
+        provided. Returns a list of high prices.
+"""
+def get_data_high(url):
+    nice_data = get_data_nodiv(url)
+    high_price = []
+    
+    for data in nice_data:
+        high_price.append(data[2])
+    return high_price
 
 """
     get_data_vol(url):
