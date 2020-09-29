@@ -145,6 +145,32 @@ def get_data_high(url):
     return high_price
 
 """
+    get_data_low(url):
+        Uses get_data_nodiv(url) function to get all the low prices of the data 
+        provided. Returns a list of low prices.
+"""
+def get_data_low(url):
+    nice_data = get_data_nodiv(url)
+    low_price = []
+    
+    for data in nice_data:
+        low_price.append(data[3])
+    return low_price
+
+"""
+    get_data_adjclose(url):
+        Uses get_data_nodiv(url) function to get all the adjclose prices of the data 
+        provided. Returns a list of adjusted closing prices.
+"""
+def get_data_adjclose(url):
+    nice_data = get_data_nodiv(url)
+    adjclose = []
+    
+    for data in nice_data:
+        adjclose.append(data[5])
+    return adjclose
+
+"""
     get_data_vol(url):
         Uses get_data_nodiv(url) function to get all the volumes of the data 
         provided. Returns a list of volume prices.
