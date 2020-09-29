@@ -194,3 +194,17 @@ def get_company_name(url):
     for name in results:
         return name
     
+"""
+    write_to_csv(url):
+        Write data scraped from url to a csv file.
+"""    
+def write_to_csv(url):
+    header = get_header(url)
+    datas = get_data_nodiv(url)
+    
+    with open('output.csv', 'w', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(header)
+        for data in datas:
+            writer.writerow(data)
+    
