@@ -86,7 +86,7 @@ def get_data_nodiv(url):
     no_div = []
     
     for data in nice_data:
-        if (data[3] =='Dividend'):
+        if (data[3] =='Dividend' or data[3] == 'Stock Split'):
             continue
         else:
             no_div.append(data)
