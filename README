@@ -1,112 +1,21 @@
-Let's pump it
-Pump it from kick like that beat
-To that turn on the bass
-Golden Wind is what I want
-(Grrrr-stick it-hahaha-stick on)
 
-Kick it-kick-kick it
-Turn it down
-We're about to turn on that bass
-Golden Wind is famous for
-(Grrrr-stick it)
+CSE 442 - MCM
 
-GIOGIO!
+Authors:
+Musaiyab Ali
+Ralph Huang
+David Forrest
+Sean Brasse
 
-Gio-Gio-Giovanna
-(Grrrr-stick it-hahaha-stick on)
+Overview:
+The project is a simply stock manager that also uses artificial intelligence to give prediction in stock prices.
 
-Here pump it from kick like that beat
-To that turn on the bass
-Golden Wind is what I want
-(Grrrr-stick it-hahaha-stick on)
+Features:
+Search for stocks
+Favorite stocks for easy access
+Display timestamps for stock information updates
+Webscrapes yahoo.finance to obtain data for stocks
 
-Kick it-kick it
-Turn it up
-We're about to turn on that bass
-Golden Wind is famous for
-(Grrrr-stick it)
-
-GIOGIO!
-
-Get it back
-Ge-ge-ge-get it back
-
-GIO-GIO-GIO-GIO-GIO
-
-GIOGIO!
-Golden Wind
-
-GIOGIO!
-Golden Wind
-
-Here pump it from kick like that beat
-To that turn on the bass
-Golden Wind is what I want
-(Grrrr-stick it-hahaha-stick on)
-
-Kick it-kick-kick it
-Turn it down
-We're about to turn on that bass
-Golden Wind is famous for
-(Grrrr-stick it)
-
-GIOGIO!
-
-Everybody get thinking
-Everybody get the way
-Golden Wind
-
-Everybody get thinking
-Everybody get the way
-Golden Wind
-
-Everybody get thinking
-Everybody get the way
-Golden Wind
-
-Everybody get thinking
-Everybody get the way
-Golden Wind
-
-Gio-Gio-Giovanna
-(Grrrr-stick it-hahaha-stick on)
-
-Here pump it from kick like that beat
-To that turn on the bass
-Golden Wind is what I want
-(Grrrr-stick it-hahaha-stick on)
-
-Kick it-kick it
-Turn it up
-We're about to turn on that bass
-Golden Wind is famous for
-(Grrrr-stick it)
-
-GIOGIO!
-
-Get it back
-Ge-ge-ge-get it back
-
-GIO-GIO-GIO-GIO-GIO
-
-GIOGIO!
-Golden Wind
-
-GIOGIO!
-Golden Wind
-
-Let's pump it
-Pump it from kick like that beat
-To that turn on the bass
-Golden Wind is what I want
-(Grrrr-stick it-hahaha-stick on)
-
-Kick it-kick-kick it
-Turn it down
-
-We're about to turn on that bass
-Golden Wind is famous for
-(Grrrr-stick it-hahaha)
-
-GIOGIO!
-source: https://genius.com/Yugo-kanno-il-vento-doro-lyrics
+Usage:
+As of sprint 1, the main and only usage is done through the favorites_menu.py file. No parameters are required,
+it will simply open a window with the UI for the user. The UI contains the search bar, favorites menu, and the main menu. The user can currently only search for stocks and check the time in which the data was updated.
