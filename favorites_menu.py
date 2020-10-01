@@ -12,7 +12,7 @@ methods to add the functionalities.
 class MainMenu:
     #default sizes for screen resolution
     screenWid=1280
-    screenLen=720
+    screenLen=720 
 
     #checker variables to keep track of states
     insearchbar=0
@@ -20,6 +20,9 @@ class MainMenu:
 
     #the text the user is inputing into the search bar
     searchbarText=""
+
+    # Empty time string
+    updatedTimeText = ""
 
     def menuInit(self):
         
@@ -41,7 +44,7 @@ class MainMenu:
         searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         
         #button and font for search bar
-        searchBarButton, searchBarFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
 
         #favorites menu
         favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
@@ -49,7 +52,7 @@ class MainMenu:
         #screen while program is running
         while True:
             #clears the screen
-            screen.fill(0)
+            screen.fill(0) 
 
 
             #renders all of the hidden buttons
@@ -69,6 +72,12 @@ class MainMenu:
                 
             #render hidden buttons
             hamHidden=pygame.Rect(0,0,100,100)
+
+            # render updated time text
+            timeText = timeFont.render(self.updatedTimeText, True, [0, 0, 0])
+            screen.blit(timeText, (875, 670))
+            # )
+
 
             #updates the screen
             pygame.display.update()
@@ -94,13 +103,14 @@ class MainMenu:
                     if searchBarButton.collidepoint(event.pos):
                         self.insearchbar=1
                     else:
-                        self.insearchbar=0
+                        self.insearchbar=0  
                 
                 #if user typed into search bar
                 if event.type==pygame.KEYDOWN and self.insearchbar==1:
                     if event.unicode=="\r":
                         if search(self.searchbarText):
                             self.searchbarText=""
+                            self.updatedTimeText = timeStamp()
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
             

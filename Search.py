@@ -3,6 +3,7 @@
 from webscrape import *
 import pygame
 from pygame.locals import *
+import time
 
 """
 
@@ -14,15 +15,21 @@ Given a stok name will attempt to webscrape to its page, if sucessfull
 it will return True. If unsucessfull it will return false
 
 """
+
+
 def search(stockName):
     url = get_url(stockName.lower())
     print(url)
     if current_price(url) == "Error. Can't find stock name. Make sure name is correct.":
         print("Stock not Found")
-        return False
+        return False 
     else:
         print("Stock Full Name: " + get_company_name(url))
+        t = time.localtime()
+        currentTime = time.strftime("%H:%M:%S", t)
+        print(get_company_name(url) + "Stock Data Updated at " + currentTime)
         return True
+
 
 """
 
@@ -31,11 +38,16 @@ Return: Search Bar Button (pygame.Rect), Search Bar Font (pygame.font)
 Initializes the GUI structures for the search bar
 
 """
-def searchBarInitalize():
-    searchBarButton=pygame.Rect(200,10,1000,70)
-    font=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",50)
-    return searchBarButton,font
 
+
+def searchBarInitalize():
+    searchBarButton = pygame.Rect(200, 10, 1000, 70)
+    font = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 50)
+    timeFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 30)
+    t = time.localtime()
+    currentTime = time.strftime("%H:%M:%S", t)
+    updatedTime = "Stock Data Updated at " + currentTime
+    return searchBarButton, font, updatedTime, timeFont
 
 
 """
@@ -44,16 +56,23 @@ Event handler for Search bar. On key press will delete a char from search bar te
 Otherwise will add char to the search bar text
 
 """
-def updateSearchBarOnKeyPress(theGuiEvent, searchBarText ):
-    if theGuiEvent.unicode=="\b":
+
+
+def updateSearchBarOnKeyPress(theGuiEvent, searchBarText):
+    if theGuiEvent.unicode == "\b":
         return searchBarText[:-1]
-        
-    elif theGuiEvent.unicode.isalpha()  and len(searchBarText)<=10 or theGuiEvent.unicode.isdigit() and len(searchBarText)<=10 :
+
+    elif theGuiEvent.unicode.isalpha() and len(searchBarText) <= 10 or theGuiEvent.unicode.isdigit() and len(searchBarText) <= 10:
         return searchBarText+theGuiEvent.unicode
     else:
-        if len(searchBarText)>=10:
+        if len(searchBarText) >= 10:
             print("max length of string reached")
 
         return searchBarText
 
 
+def timeStamp():
+    t = time.localtime()
+    currentTime = time.strftime("%H:%M:%S", t)
+    updatedTime = "Updated Stock Data at " + str(currentTime)
+    return updatedTime
