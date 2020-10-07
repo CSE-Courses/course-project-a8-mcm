@@ -15,6 +15,8 @@ Given a stok name will attempt to webscrape to its page, if sucessfull
 it will return True. If unsucessfull it will return false
 
 """
+# Variable that holds stockName
+# stkName = ""
 
 
 def search(stockName):
@@ -22,9 +24,10 @@ def search(stockName):
     print(url)
     if current_price(url) == "Error. Can't find stock name. Make sure name is correct.":
         print("Stock not Found")
-        return False 
+        return False
     else:
         print("Stock Full Name: " + get_company_name(url))
+        # stockName = get_company_name(url)
         t = time.localtime()
         currentTime = time.strftime("%H:%M:%S", t)
         print(get_company_name(url) + "Stock Data Updated at " + currentTime)
@@ -44,10 +47,12 @@ def searchBarInitalize():
     searchBarButton = pygame.Rect(200, 10, 1000, 70)
     font = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 50)
     timeFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 30)
+    companyFont = pygame.font.Font(
+        "../course-project-a8-mcm/Fonts/times.ttf", 50)
     t = time.localtime()
     currentTime = time.strftime("%H:%M:%S", t)
     updatedTime = "Stock Data Updated at " + currentTime
-    return searchBarButton, font, updatedTime, timeFont
+    return searchBarButton, font, updatedTime, timeFont, companyFont
 
 
 """
