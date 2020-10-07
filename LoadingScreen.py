@@ -1,13 +1,66 @@
 import pygame
 from pygame.locals import *
+from tqdm import *
 from Search import *
 
-"""
-@Authors: Musaiyab Ali, David Forrest
-The temporary main class and function that controls the entire program. The MainMenu class is used to create and hold certain
-variables that will be used in multiple methods. For now, there's only one method that serves to display the UI and call the back-end
-methods to add the functionalities.
-"""
+#method for running the loading screen/transition screen
+def loadScreen(currentScreen):
+    #declaring screen, and images used
+    #pygame.init()
+    screen = currentScreen
+    bgIMG = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading1.png")
+    bgIMG2 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading2.png")
+    bgIMG3 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading3.png")
+    bgIMG4 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading4.png")
+    bgIMG5 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading5.png")
+    bgIMG6 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading6.png")
+    bgIMG7 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading7.png")
+    bgIMG8 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading8.png")
+    bgIMG9 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading9.png")
+    bgIMG10 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading10.png")
+    bgIMG11 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading11.png")
+    bgIMG12 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading12.png")
+    bgIMG13 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading13.png")
+    bgIMG14 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading14.png")
+    bgIMG15 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loading15.png")
+
+    #loop for loading screen and animation, runs for ~10 seconds
+    loop = tqdm(total = 100, position = 0, leave = False)
+    for k in range(100):
+        loop.set_description("Loading...".format(k))
+        #screen.fill(0)
+        screen.blit(bgIMG, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG2, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG3, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG4, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG5, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG6, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG7, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG8, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG9, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG10, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG11, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG12, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG13, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG14, (1024,464))
+        pygame.display.update()
+        screen.blit(bgIMG15, (1024,464))
+        pygame.display.update()        
+        loop.update(1)
+    loop.close()
 
 class MainMenu:
     #default sizes for screen resolution
@@ -48,6 +101,8 @@ class MainMenu:
 
         #favorites menu
         favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+
+        loadScreen(screen)
 
         #screen while program is running
         while True:
