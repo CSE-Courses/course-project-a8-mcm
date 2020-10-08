@@ -207,3 +207,7 @@ def write_to_csv(url):
         writer.writerow(header)
         for data in datas:
             writer.writerow(data)
+
+print(get_data_nodiv("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch"))
+
+print(write_to_csv("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch"))
