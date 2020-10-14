@@ -66,6 +66,8 @@ class MainMenu:
         #search bar box
         searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         
+        #search bar box
+        hompeageIcons=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/hompage Icons.png")
         #button and font for search bar
         searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
 
@@ -76,7 +78,7 @@ class MainMenu:
         goback, numb1, numb2, numb3, numb4, numb5, goforward=make_buttons_for_page_switching()
 
         pagenumber=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",25)
-        stockfont=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",50)
+        stockfont=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",65)
 
         #screen while program is running
         while True:
@@ -101,8 +103,7 @@ class MainMenu:
             pygame.draw.rect(screen,[0,0,0],stock4)
             pygame.draw.rect(screen,[0,0,0],stock5)
             
-            if self.hamState==1:
-                screen.blit(favMenu, (0,0))
+
                 
             #render hidden buttons
             hamHidden=pygame.Rect(0,0,100,100)
@@ -119,41 +120,95 @@ class MainMenu:
             pygame.draw.rect(screen,[255,0,0],numb5)
             pygame.draw.rect(screen,[0,255,0],goback)
             pygame.draw.rect(screen,[0,255,0],goforward)
+            screen.blit(hompeageIcons,(0,0))
 
 
 
-            firstStock=stockfont.render(self.stockList[self.currentPage*5-5], True,[255,0,0])
-            secondStock=stockfont.render(self.stockList[self.currentPage*5-4], True,[255,0,0])
-            thirdStock=stockfont.render(self.stockList[self.currentPage*5-3], True,[255,0,0])
-            fourthStock=stockfont.render(self.stockList[self.currentPage*5-2], True,[255,0,0])
-            fifthStock=stockfont.render(self.stockList[self.currentPage*5-1], True,[255,0,0])
+            firstStock=stockfont.render(self.stockList[self.currentPage*5-5], True,[0,0,0])
+            secondStock=stockfont.render(self.stockList[self.currentPage*5-4], True,[0,0,0])
+            thirdStock=stockfont.render(self.stockList[self.currentPage*5-3], True,[0,0,0])
+            fourthStock=stockfont.render(self.stockList[self.currentPage*5-2], True,[0,0,0])
+            fifthStock=stockfont.render(self.stockList[self.currentPage*5-1], True,[0,0,0])
             screen.blit(firstStock,(30, 110))
             screen.blit(secondStock,(30, 220))
             screen.blit(thirdStock,(30, 330))
             screen.blit(fourthStock,(30, 440))
             screen.blit(fifthStock,(30, 550))
             if self.currentPage<6:
-                wan=pagenumber.render(str(self.currentPage),True,[0,0,0])
-                two=pagenumber.render(str(self.currentPage+1),True,[0,0,0])
-                three=pagenumber.render(str(self.currentPage+2),True,[0,0,0])
-                four=pagenumber.render(str(self.currentPage+3),True,[0,0,0])
-                five=pagenumber.render(str(self.currentPage+4),True,[0,0,0])
+                if self.currentPage==1:
+                    wan=pagenumber.render("1",True,[255,255,255])
+                    two=pagenumber.render("2",True,[0,0,0])
+                    three=pagenumber.render("3",True,[0,0,0])
+                    four=pagenumber.render("4",True,[0,0,0])
+                    five=pagenumber.render("5",True,[0,0,0])
+                elif self.currentPage==2:
+                    wan=pagenumber.render("1",True,[0,0,0])
+                    two=pagenumber.render("2",True,[255,255,255])
+                    three=pagenumber.render("3",True,[0,0,0])
+                    four=pagenumber.render("4",True,[0,0,0])
+                    five=pagenumber.render("5",True,[0,0,0])
+                elif self.currentPage==3:
+                    wan=pagenumber.render("1",True,[0,0,0])
+                    two=pagenumber.render("2",True,[0,0,0])
+                    three=pagenumber.render("3",True,[255,255,255])
+                    four=pagenumber.render("4",True,[0,0,0])
+                    five=pagenumber.render("5",True,[0,0,0])
+                elif self.currentPage==4:
+                    wan=pagenumber.render("1",True,[0,0,0])
+                    two=pagenumber.render("2",True,[0,0,0])
+                    three=pagenumber.render("3",True,[0,0,0])
+                    four=pagenumber.render("4",True,[255,255,255])
+                    five=pagenumber.render("5",True,[0,0,0])
+                else:
+                    wan=pagenumber.render("1",True,[0,0,0])
+                    two=pagenumber.render("2",True,[0,0,0])
+                    three=pagenumber.render("3",True,[0,0,0])
+                    four=pagenumber.render("4",True,[0,0,0])
+                    five=pagenumber.render("5",True,[255,255,255])
                 screen.blit(wan,(68,665))
                 screen.blit(two,(108,665))
                 screen.blit(three,(148,665))
                 screen.blit(four,(188,665))
                 screen.blit(five,(228,665))
             else:
-                wan=pagenumber.render("6",True,[0,0,0])
-                two=pagenumber.render("7",True,[0,0,0])
-                three=pagenumber.render("8",True,[0,0,0])
-                four=pagenumber.render("9",True,[0,0,0])
-                five=pagenumber.render("10",True,[0,0,0])
+                if self.currentPage==6:
+                    wan=pagenumber.render("6",True,[255,255,255])
+                    two=pagenumber.render("7",True,[0,0,0])
+                    three=pagenumber.render("8",True,[0,0,0])
+                    four=pagenumber.render("9",True,[0,0,0])
+                    five=pagenumber.render("10",True,[0,0,0])
+                elif self.currentPage==7:
+                    wan=pagenumber.render("6",True,[0,0,0])
+                    two=pagenumber.render("7",True,[255,255,255])
+                    three=pagenumber.render("8",True,[0,0,0])
+                    four=pagenumber.render("9",True,[0,0,0])
+                    five=pagenumber.render("10",True,[0,0,0])
+                elif self.currentPage==8:
+                    wan=pagenumber.render("6",True,[0,0,0])
+                    two=pagenumber.render("7",True,[0,0,0])
+                    three=pagenumber.render("8",True,[255,255,255])
+                    four=pagenumber.render("9",True,[0,0,0])
+                    five=pagenumber.render("10",True,[0,0,0])
+                elif self.currentPage==9:
+                    wan=pagenumber.render("6",True,[0,0,0])
+                    two=pagenumber.render("7",True,[0,0,0])
+                    three=pagenumber.render("8",True,[0,0,0])
+                    four=pagenumber.render("9",True,[255,255,255])
+                    five=pagenumber.render("10",True,[0,0,0])
+                else:
+                    wan=pagenumber.render("6",True,[0,0,0])
+                    two=pagenumber.render("7",True,[0,0,0])
+                    three=pagenumber.render("8",True,[0,0,0])
+                    four=pagenumber.render("9",True,[0,0,0])
+                    five=pagenumber.render("10",True,[255,255,255])
                 screen.blit(wan,(68,665))
                 screen.blit(two,(108,665))
                 screen.blit(three,(148,665))
                 screen.blit(four,(188,665))
                 screen.blit(five,(222,665))
+            
+            if self.hamState==1:
+                screen.blit(favMenu, (0,0))
             #updates the screen
             pygame.display.update()
 
