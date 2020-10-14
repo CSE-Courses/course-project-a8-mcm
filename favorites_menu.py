@@ -23,7 +23,7 @@ class MainMenu:
 
     # Empty time string
     updatedTimeText = ""
-
+ 
     def menuInit(self):
         
         pygame.init()
@@ -113,8 +113,6 @@ class MainMenu:
                             self.updatedTimeText = timeStamp()
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
-            
-
 
 #calls the method to run the program
 test=MainMenu()
