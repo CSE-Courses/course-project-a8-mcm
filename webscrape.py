@@ -57,7 +57,9 @@ def get_header(url):
     headings = []
     for heading in history_table_heading:
         headings.append(heading.get_text(separator='| '))
-    headings = headings[0].split('| ')
+    headings = headings[0].split("|")
+    headings[4] = "Close"
+    headings[5] = "Adj Close"
     return headings
 
 """
@@ -89,6 +91,8 @@ def get_data_nodiv(url):
         if (data[3] =='Dividend' or data[3] == 'Stock Split'):
             continue
         else:
+            data[6] = data[6].replace(",", '')                
+            data[6] = int(data[6])
             no_div.append(data)
     return no_div
 
@@ -207,7 +211,3 @@ def write_to_csv(url):
         writer.writerow(header)
         for data in datas:
             writer.writerow(data)
-
-print(get_data_nodiv("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch"))
-
-print(write_to_csv("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch"))
