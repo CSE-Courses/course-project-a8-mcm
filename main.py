@@ -9,7 +9,7 @@ variables that will be used in multiple methods. For now, there's only one metho
 methods to add the functionalities.
 """
 
-class MainMenu:
+class MainRunner:
     #default sizes for screen resolution
     screenWid=1280
     screenLen=720 
@@ -23,7 +23,20 @@ class MainMenu:
 
     # Empty time string
     updatedTimeText = ""
- 
+
+    #determines wut functions to call in main
+    next = 0
+
+    def favs(self, screen, image):
+        favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+
+        if self.hamState==0:
+            screen.blit(favMenu, (0,0))
+            self.hamState=1
+        else:
+            self.hamState=0
+            self.next = 0
+
     def mainScreen(self):
         
         pygame.init()
@@ -65,10 +78,7 @@ class MainMenu:
             #render search bar text
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
             screen.blit(searchtext,(200,15))
-            
-            if self.hamState==1:
-                screen.blit(favMenu, (0,0))
-                
+                            
             #render hidden buttons
             hamHidden=pygame.Rect(0,0,100,100)
 
@@ -89,13 +99,12 @@ class MainMenu:
                     pygame.quit() 
                     exit(0)
 
-                #if user clicked hamburger icon
+                #event handler for clicking mouse
                 if event.type==pygame.MOUSEBUTTONDOWN:
-                    if hamHidden.collidepoint(event.pos):
-                        if self.hamState==0:
-                            self.hamState=1
-                        else:
-                            self.hamState=0
+                    #if ham icon was clicked
+                    if hamHidden.collidepoint(event.pos):                        
+                        self.next = 1
+                        self.favs(screen, favMenu)                    
  
                 #whether user clicked into search bar
                 if event.type==pygame.MOUSEBUTTONDOWN:
@@ -113,27 +122,26 @@ class MainMenu:
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
 
-    def run(self):
-        next = mainScreen(self)
+                        
 
-        while True:
-            #run david's method -> constantly check wut it returns to load next page 
+    # def run(self):
+    #     #next = mainScreen(self)
+    #     curScreen = self.mainScreen()
+
+    #     while True:
+    #         #run david's method -> constantly check wut it returns to load next page             
             
-            if next == 0:
-                #transition screen
-                #next = method()
-            elif next == 1:
-                #do transition screen
-                #next = method()
-            elif next == 2:
-                #do transition screen
-                #next = method()
-            elif next == 3:
-                #do transition screen
-                #next = method()
-            
-
-
+    #         if self.next == 0:
+    #             self.mainScreen()
+    #         elif self.next == 1:
+    #             self.favs(curScreen)
+    #         #elif self.next == 2:
+    #             #do transition screen
+    #             #next = method()
+    #         #elif self.next == 3:
+    #             #do transition screen
+    #             #next = method()
+          
 #calls the method to run the program
-test=MainMenu()
-test.screen()
+test=MainRunner()
+test.mainScreen()
