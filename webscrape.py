@@ -56,7 +56,7 @@ def get_header(url):
 
     headings = []
     for heading in history_table_heading:
-        headings.append(heading.get_text(separator='| '))
+        headings.append(heading.get_text(separator='|'))
     headings = headings[0].split("|")
     headings[4] = "Close"
     headings[5] = "Adj Close"
@@ -74,7 +74,7 @@ def get_data(url):
     nice_data = []
 
     for data in history_table_data:
-        datas.append(data.get_text(separator='|'))
+        datas.append(data.get_text(separator='| '))
     for data in datas:
         nice_data.append(data.split('| '))
     return nice_data
