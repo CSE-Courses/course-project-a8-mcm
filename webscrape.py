@@ -74,7 +74,7 @@ def get_data(url):
     nice_data = []
 
     for data in history_table_data:
-        datas.append(data.get_text(separator='| '))
+        datas.append(data.get_text(separator='|'))
     for data in datas:
         nice_data.append(data.split('| '))
     return nice_data
