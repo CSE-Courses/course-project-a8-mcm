@@ -1,13 +1,31 @@
 import pygame
+import time
 from pygame.locals import *
+from tqdm import *
 from Search import *
 
-"""
-@Authors: Musaiyab Ali, David Forrest
-The temporary main class and function that controls the entire program. The MainMenu class is used to create and hold certain
-variables that will be used in multiple methods. For now, there's only one method that serves to display the UI and call the back-end
-methods to add the functionalities.
-"""
+#method for running the loading screen/transition screen
+def loadScreen(currentScreen):
+    #declaring screen, and images used
+    #pygame.init()
+    screen = currentScreen
+    bgIMG = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load1.png")
+    bgIMG2 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load2.png")
+    
+    #loop for loading screen and animation, runs for ~10 seconds
+    loop = tqdm(total = 10, position = 0, leave = False)
+    for k in range(10):
+        loop.set_description("Loading...".format(k))
+        #screen.fill(0)
+        screen.blit(bgIMG, (0, 0))
+        pygame.display.update()
+        time.sleep(0.1)
+        screen.blit(bgIMG2, (0, 0))
+        pygame.display.update() 
+        time.sleep(0.1)       
+        
+        loop.update(1)
+    loop.close()
 
 class MainMenu:
     #default sizes for screen resolution
@@ -44,10 +62,12 @@ class MainMenu:
         searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         
         #button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont, test = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
 
         #favorites menu
-        # favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+
+        loadScreen(screen)
 
         #screen while program is running
         while True:
@@ -67,8 +87,8 @@ class MainMenu:
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
             screen.blit(searchtext,(200,15))
             
-            # if self.hamState==1:
-            #     screen.blit(favMenu, (0,0))
+            if self.hamState==1:
+                screen.blit(favMenu, (0,0))
                 
             #render hidden buttons
             hamHidden=pygame.Rect(0,0,100,100)
@@ -114,6 +134,6 @@ class MainMenu:
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
 
-#calls the method to run the program
+#calls the method to run the program.
 test=MainMenu()
 test.menuInit()
