@@ -18,7 +18,7 @@ class TestWebScape(unittest.TestCase):
     # Testing the current_price function
     def test_current_price(self):
         self.assertEqual(current_price(
-            "https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch"), '39.26')
+            "https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch"), '39.39')
         
     def test_not_current_price(self):
         self.assertNotEqual(current_price(
@@ -43,7 +43,7 @@ class TestWebScape(unittest.TestCase):
     # Testing getting the data from the table by testing one row
     def test_get_data(self):
         data = get_data("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(data[2],
+        self.assertEqual(data[3],
                          ['Sep 25, 2020', '37.76', '38.54', '37.62', '38.45', '38.45', '22,966,600'])
         
     # Testing data with no dividends
@@ -55,31 +55,31 @@ class TestWebScape(unittest.TestCase):
         
     def test_no_divs(self):
         no_divs = get_data_nodiv("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(no_divs[1],
-                         ['Sep 28, 2020', '39.20', '39.29', '38.79', '39.13', '39.13', '24,239,500'])
+        self.assertEqual(no_divs[2],
+                         ['Sep 28, 2020', '39.20', '39.29', '38.79', '39.13', '39.13', '24,275,700'])
         
     # Testing the dates
     def test_dates(self):
         dates = get_data_date("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(dates[0], 'Sep 29, 2020')
+        self.assertEqual(dates[1], 'Sep 29, 2020')
         
     # Testing opening prices
     def test_csco_open_prices(self):
         open_price = get_data_open("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(open_price[1], '39.20')
+        self.assertEqual(open_price[2], '39.20')
         
     def test_aapl_open_prices(self):
         open_price = get_data_open("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
-        self.assertEqual(open_price[1], '115.01')
+        self.assertEqual(open_price[2], '115.01')
         
     # Testing Closing Prices
     def test_csco_close_prices(self):
         close_price = get_data_close("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(close_price[1], '39.13')
+        self.assertEqual(close_price[2], '39.13')
         
     def test_aapl_close_price(self):
         close_price = get_data_close("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
-        self.assertEqual(close_price[1], '114.96')
+        self.assertEqual(close_price[2], '114.96')
         
     # Test getting the company name
     def test_csco_company_name(self):
@@ -95,29 +95,29 @@ class TestWebScape(unittest.TestCase):
     # Test getting the high prices
     def test_csco_high_prices(self):
         high = get_data_high("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(high[1], '39.29')
+        self.assertEqual(high[2], '39.29')
         
     def test_aapl_high_prices(self):
         high = get_data_high("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
-        self.assertEqual(high[1], '115.32')
+        self.assertEqual(high[2], '115.32')
         
     # Test getting the low prices
     def test_csco_low_prices(self):
         low = get_data_low("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(low[1], '38.79')
+        self.assertEqual(low[2], '38.79')
         
     def test_aapl_low_prices(self):
         low = get_data_low("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
-        self.assertEqual(low[1], '112.78')
+        self.assertEqual(low[2], '112.78')
         
     # Test getting adjclose prices
     def test_csco_adjprices(self):
         adj = get_data_adjclose("https://finance.yahoo.com/quote/csco/history?p=csco&tsrc=find-tre-srch")
-        self.assertEqual(adj[1], '39.13')
+        self.assertEqual(adj[2], '39.13')
         
     def test_aapl_adjprices(self):
         adj = get_data_adjclose("https://finance.yahoo.com/quote/aapl/history?p=aapl&tsrc=find-tre-srch")
-        self.assertEqual(adj[1], '114.96')
+        self.assertEqual(adj[2], '114.96')
         
             
 if __name__ == '__main__':

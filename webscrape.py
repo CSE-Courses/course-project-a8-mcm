@@ -33,7 +33,7 @@ def current_price(url):
     else:
         for price in results:
             return price
-        
+
 """
     history_data(url):
         Requests access to yahoo finance history table and returns the table in
@@ -43,7 +43,7 @@ def history_data(url):
     page = requests.get(url).text
     soup = BeautifulSoup(page, 'lxml')
     history_table = soup.find('table', class_='W(100%) M(0)')
-    
+
     return history_table
 
 """
@@ -53,16 +53,18 @@ def history_data(url):
 def get_header(url):
     history_table = history_data(url)
     history_table_heading = history_table.thead.find_all("tr")
-    
+
     headings = []
     for heading in history_table_heading:
-        headings.append(heading.get_text(separator='| '))
-    headings = headings[0].split('| ')
+        headings.append(heading.get_text(separator='|'))
+    headings = headings[0].split("|")
+    headings[4] = "Close"
+    headings[5] = "Adj Close"
     return headings
 
 """
     get_data(url):
-        Uses history_data(url) function to get the body data and store each 
+        Uses history_data(url) function to get the body data and store each
         row as a sublist. Returns a list.
 """
 def get_data(url):
@@ -70,7 +72,7 @@ def get_data(url):
     history_table_data = history_table.tbody.find_all("tr")
     datas = []
     nice_data = []
-    
+
     for data in history_table_data:
         datas.append(data.get_text(separator='| '))
     for data in datas:
@@ -84,101 +86,103 @@ def get_data(url):
 def get_data_nodiv(url):
     nice_data = get_data(url)
     no_div = []
-    
+
     for data in nice_data:
         if (data[3] =='Dividend' or data[3] == 'Stock Split'):
             continue
         else:
+            data[6] = data[6].replace(",", '')                
+            data[6] = int(data[6])
             no_div.append(data)
     return no_div
 
 """
     get_data_date(url):
-        Uses get_data_nodiv(url) function to get all the dates the data 
+        Uses get_data_nodiv(url) function to get all the dates the data
         provides from get_data_nodiv(url). Returns a list of date prices.
 """
 def get_data_date(url):
     nice_data = get_data_nodiv(url)
     dates = []
-    
+
     for data in nice_data:
         dates.append(data[0])
     return dates
 
 """
     get_data_open(url):
-        Uses get_data_nodiv(url) function to get all the open prices of the data 
+        Uses get_data_nodiv(url) function to get all the open prices of the data
         provided. Returns a list of open prices.
 """
 def get_data_open(url):
     nice_data = get_data_nodiv(url)
     open_price = []
-    
+
     for data in nice_data:
         open_price.append(data[1])
     return open_price
 
 """
     get_data_close(url):
-        Uses get_data_nodiv(url) function to get all the close prices of the data 
+        Uses get_data_nodiv(url) function to get all the close prices of the data
         provided. Returns a list of closing prices.
 """
 def get_data_close(url):
     nice_data = get_data_nodiv(url)
     close_price = []
-    
+
     for data in nice_data:
         close_price.append(data[4])
     return close_price
 
 """
     get_data_high(url):
-        Uses get_data_nodiv(url) function to get all the high open prices of the data 
+        Uses get_data_nodiv(url) function to get all the high open prices of the data
         provided. Returns a list of high prices.
 """
 def get_data_high(url):
     nice_data = get_data_nodiv(url)
     high_price = []
-    
+
     for data in nice_data:
         high_price.append(data[2])
     return high_price
 
 """
     get_data_low(url):
-        Uses get_data_nodiv(url) function to get all the low prices of the data 
+        Uses get_data_nodiv(url) function to get all the low prices of the data
         provided. Returns a list of low prices.
 """
 def get_data_low(url):
     nice_data = get_data_nodiv(url)
     low_price = []
-    
+
     for data in nice_data:
         low_price.append(data[3])
     return low_price
 
 """
     get_data_adjclose(url):
-        Uses get_data_nodiv(url) function to get all the adjclose prices of the data 
+        Uses get_data_nodiv(url) function to get all the adjclose prices of the data
         provided. Returns a list of adjusted closing prices.
 """
 def get_data_adjclose(url):
     nice_data = get_data_nodiv(url)
     adjclose = []
-    
+
     for data in nice_data:
         adjclose.append(data[5])
     return adjclose
 
 """
     get_data_vol(url):
-        Uses get_data_nodiv(url) function to get all the volumes of the data 
+        Uses get_data_nodiv(url) function to get all the volumes of the data
         provided. Returns a list of volume prices.
 """
 def get_data_vol(url):
     nice_data = get_data_nodiv(url)
     vol_price = []
-    
+
     for data in nice_data:
         vol_price.append(data[6])
     return vol_price
@@ -193,18 +197,17 @@ def get_company_name(url):
     results = soup.find('h1', class_ = 'D(ib) Fz(18px)')
     for name in results:
         return name
-    
+
 """
     write_to_csv(url):
         Write data scraped from url to a csv file.
-"""    
+"""
 def write_to_csv(url):
     header = get_header(url)
     datas = get_data_nodiv(url)
-    
+
     with open('output.csv', 'w', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(header)
         for data in datas:
             writer.writerow(data)
-    

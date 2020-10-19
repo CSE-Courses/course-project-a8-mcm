@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from Search import *
+from LoadingScreen import *
 
 """
 @Authors: Musaiyab Ali, David Forrest
@@ -24,18 +25,26 @@ class MainRunner:
     # Empty time string
     updatedTimeText = ""
 
-    #determines wut functions to call in main
-    next = 0
-
-    def favs(self, screen, image):
+    #function for initializing images
+    def imgInit(self):
+        #loading images
+        loadImg1 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load1.png")
+        loadImg2 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load2.png")
+        #background image
+        fillerImag=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/Background base.png")
+        #menu button image
+        hamburgermenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/HamburgerMenu.png")
+        #favorites menu image
         favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        #search bar image
+        searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
 
-        if self.hamState==0:
-            screen.blit(favMenu, (0,0))
-            self.hamState=1
-        else:
-            self.hamState=0
-            self.next = 0
+        return loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar
+
+    def buttonInit(self):
+        #render hidden buttons
+        hamHidden=pygame.Rect(0,0,100,100)
+        return hamHidden
 
     def mainScreen(self):
         
@@ -45,22 +54,15 @@ class MainRunner:
         pygame.display.set_caption('MCM')
         
         # width then Height
-        screen=pygame.display.set_mode((self.screenWid , self.screenLen))
+        screen=pygame.display.set_mode((self.screenWid , self.screenLen))    
         
-        #background image
-        fillerImag=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/Background base.png")
+        #calls method to initialize all the images
+        loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar = self.imgInit()
 
-        #menu button
-        hamburgermenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/HamburgerMenu.png")
-        
-        #search bar box
-        searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
-        
-        #button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
+        #calls method from Search to make button and font for search bar
+        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()       
 
-        #favorites menu
-        favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        loadScreen(screen) 
 
         #screen while program is running
         while True:
@@ -69,6 +71,9 @@ class MainRunner:
 
             #renders all of the hidden buttons
             pygame.draw.rect(screen,[0,0,0],searchBarButton)
+
+            #calls method to initialize buttons
+            hamHidden = self.buttonInit()
 
             #renders background and menu buttons
             screen.blit(fillerImag, (0,0))
@@ -79,15 +84,15 @@ class MainRunner:
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
             screen.blit(searchtext,(200,15))
                             
-            #render hidden buttons
-            hamHidden=pygame.Rect(0,0,100,100)
-
             # render updated time text
             timeText = timeFont.render(self.updatedTimeText, True, [0, 0, 0])
             screen.blit(timeText, (875, 670))
             # )
 
-
+            #checks if fav menu button is clicked
+            if self.hamState==1:
+                screen.blit(favMenu, (0,0))
+            
             #updates the screen
             pygame.display.update()
 
@@ -99,19 +104,17 @@ class MainRunner:
                     pygame.quit() 
                     exit(0)
 
-                #event handler for clicking mouse
+               #if user clicked left mouse button
                 if event.type==pygame.MOUSEBUTTONDOWN:
-                    #if ham icon was clicked
-                    if hamHidden.collidepoint(event.pos):                        
-                        self.next = 1
-                        self.favs(screen, favMenu)                    
- 
-                #whether user clicked into search bar
-                if event.type==pygame.MOUSEBUTTONDOWN:
-                    if searchBarButton.collidepoint(event.pos):
-                        self.insearchbar=1
+                    if hamHidden.collidepoint(event.pos):
+                        if self.hamState==0:
+                            self.hamState=1
+                        else:
+                            self.hamState=0                  
+                    elif searchBarButton.collidepoint(event.pos):
+                        self.insearchbar=1 
                     else:
-                        self.insearchbar=0  
+                        self.insearchbar=0                       
                 
                 #if user typed into search bar
                 if event.type==pygame.KEYDOWN and self.insearchbar==1:
@@ -122,26 +125,6 @@ class MainRunner:
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
 
-                        
-
-    # def run(self):
-    #     #next = mainScreen(self)
-    #     curScreen = self.mainScreen()
-
-    #     while True:
-    #         #run david's method -> constantly check wut it returns to load next page             
-            
-    #         if self.next == 0:
-    #             self.mainScreen()
-    #         elif self.next == 1:
-    #             self.favs(curScreen)
-    #         #elif self.next == 2:
-    #             #do transition screen
-    #             #next = method()
-    #         #elif self.next == 3:
-    #             #do transition screen
-    #             #next = method()
-          
-#calls the method to run the program
+                    
 test=MainRunner()
 test.mainScreen()

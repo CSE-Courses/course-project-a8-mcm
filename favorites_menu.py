@@ -44,10 +44,10 @@ class MainMenu:
         searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         
         #button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, test = searchBarInitalize()
 
         #favorites menu
-        favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        # favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
 
         #screen while program is running
         while True:
@@ -67,8 +67,8 @@ class MainMenu:
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
             screen.blit(searchtext,(200,15))
             
-            if self.hamState==1:
-                screen.blit(favMenu, (0,0))
+            # if self.hamState==1:
+            #     screen.blit(favMenu, (0,0))
                 
             #render hidden buttons
             hamHidden=pygame.Rect(0,0,100,100)
