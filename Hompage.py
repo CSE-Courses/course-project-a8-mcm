@@ -69,7 +69,7 @@ class MainMenu:
         #search bar box
         hompeageIcons=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/hompage Icons.png")
         #button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, irrellavant = searchBarInitalize()
 
         #favorites menu
         favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
