@@ -44,7 +44,7 @@ class MainMenu:
         searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         
         #button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, test = searchBarInitalize()
 
         #favorites menu
         # favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
