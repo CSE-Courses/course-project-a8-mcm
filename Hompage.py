@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from Search import *
+from TempInfoPage import*
 
 """
 @Authors: Musaiyab Ali, David Forrest
@@ -38,13 +39,15 @@ class MainMenu:
 
     #the text the user is inputing into the search bar
     searchbarText=""
+    
+    inStockInfoPage=0
 
     # Empty time string
     updatedTimeText = ""
     currentPage=1
     didPageChange=True
 
-    stockList=["GILD","WMT","UNP", "UTX","HPQ", "V", "CSCO", "SLB", "AMGN", "BA", "TGT", "COP", "CMCSA", "BMY", "CVX", "VZ", "BP", "T", "UNH", "MCD", "PFE", "ABT", "FB", "DIS", "MMM", "XOM", "ORCL", "PEP","HD", "JPM", "INTC", "WFC", "MRK", "KO", "AMZN", "PG", "BRKB","GOOGL", "GM", "JNJ", "MO", "IBM", "GE", "MSFT", "AAPL","NVDA", "AMD", "GE", "NTDOF", "SNE"]
+    stockList=["GILD","WMT","UNP", "GPRO","HPQ", "V", "CSCO", "SLB", "AMGN", "BA", "TGT", "COP", "CMCSA", "BMY", "CVX", "VZ", "BP", "T", "UNH", "MCD", "PFE", "ABT", "FB", "DIS", "MMM", "XOM", "ORCL", "PEP","HD", "JPM", "INTC", "WFC", "MRK", "KO", "AMZN", "PG", "BRKB","GOOGL", "GM", "JNJ", "MO", "IBM", "GE", "MSFT", "AAPL","NVDA", "AMD", "GE", "NTDOF", "SNE"]
 
 
     def menuInit(self):
@@ -222,6 +225,39 @@ class MainMenu:
 
                 #if user clicked hamburger icon
                 if event.type==pygame.MOUSEBUTTONDOWN:
+
+                    if stock1.collidepoint(event.pos):
+                        newPage=InfoPage()
+                        newPage.setStock(self.stockList[self.currentPage*5-5])
+                        newPage.infoPgInit()
+                    if stock2.collidepoint(event.pos):
+                        newPage=InfoPage()
+                        newPage.setStock(self.stockList[self.currentPage*5-4])
+                        newPage.infoPgInit()
+                        #temps=InfoPage(self.stockList[self.currentPage*5-4])
+                    if stock3.collidepoint(event.pos):
+                        newPage=InfoPage()
+                        newPage.setStock(self.stockList[self.currentPage*5-3])
+                        newPage.infoPgInit()
+                        # temps=TempInfoPage.InfoPage(self.stockList[self.currentPage*5-3])
+                    if stock4.collidepoint(event.pos):
+                        newPage=InfoPage()
+                        newPage.setStock(self.stockList[self.currentPage*5-2])
+                        newPage.infoPgInit()
+                        #temps=InfoPage(self.stockList[self.currentPage*5-2])
+                    if stock5.collidepoint(event.pos):
+                        newPage=InfoPage()
+                        newPage.setStock(self.stockList[self.currentPage*5-1])
+                        newPage.infoPgInit()
+                        #temps=InfoPage(self.stockList[self.currentPage*5-1])
+
+
+
+
+
+
+
+
                     if hamHidden.collidepoint(event.pos):
                         if self.hamState==0:
                             self.hamState=1
@@ -284,6 +320,9 @@ class MainMenu:
                 if event.type==pygame.KEYDOWN and self.insearchbar==1:
                     if event.unicode=="\r":
                         if search(self.searchbarText):
+                            newPage=InfoPage()
+                            newPage.setStock(self.searchbarText)
+                            newPage.infoPgInit()
                             self.searchbarText=""
                             self.updatedTimeText = timeStamp()
                     else:
