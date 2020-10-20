@@ -22,10 +22,13 @@ it will return True. If unsucessfull it will return false
 def search(stockName):
     url = get_url(stockName.lower())
     print(url)
-    if current_price(url) == "Error. Can't find stock name. Make sure name is correct.":
+    price=current_price(url)
+    if price == "Error. Can't find stock name. Make sure name is correct." or price==None:
         print("Stock not Found")
         return False
     else:
+        print(current_price(url))
+        print("THIS IS THECURRENT PRIce")
         print("Stock Full Name: " + get_company_name(url))
         # stockName = get_company_name(url)
         t = time.localtime()
