@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Search import *
+from Search2 import *
 from webscrape import *
 
 """
@@ -43,15 +43,19 @@ class InfoPage:
 
         # background image
         fillerImag = pygame.image.load(
-            "../course-project-a8-mcm/images/homepageFiles/Background base.png")
+            "../course-project-a8-mcm/images/homepageFiles/white.png")
 
         # menu button
         hamburgermenu = pygame.image.load(
-            "../course-project-a8-mcm/images/homepageFiles/HamburgerMenu.png")
+            "../course-project-a8-mcm/images/homepageFiles/burger.png")
 
         # search bar box
         searchbar = pygame.image.load(
             "../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
+
+        # search icon
+        searchIcon = pygame.image.load(
+            "../course-project-a8-mcm/images/homepageFiles/searchy3.png")
 
         # back button
         backButton = pygame.image.load(
@@ -61,50 +65,50 @@ class InfoPage:
         searchBarButton, searchBarFont, updatedTime, timeFont, companyFont = searchBarInitalize()
 
         # favorites menu
-        # favMenu = pygame.image.load(
-        #     "../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        favMenu = pygame.image.load(
+            "../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
 
         # screen while program is running
         while True:
             # clears the screen
             screen.fill(0)
 
-            # renders all of the hidden buttons
-            pygame.draw.rect(screen, [0, 0, 0], searchBarButton)
-
             # renders background and menu buttons
             screen.blit(fillerImag, (0, 0))
+            # renders all of the hidden buttons
+            pygame.draw.rect(screen, [0, 0, 0], searchBarButton)
             screen.blit(searchbar, (0, 0))
-            screen.blit(hamburgermenu, (0, 0))
+            screen.blit(searchIcon, (205, 28))
+            screen.blit(hamburgermenu, (10, 15))
             screen.blit(backButton, (15, 675))
 
             # render search bar text
             searchtext = searchBarFont.render(
                 self.searchbarText, True, [0, 0, 0])
-            screen.blit(searchtext, (200, 15))
+            screen.blit(searchtext, (250, 15))
 
             # #render Company Name
             compName = companyFont.render(
-                self.companyName, True, [255, 255, 255])
+                self.companyName, True, [0, 0, 0])
 
-            # if self.hamState == 1:
-            #     screen.blit(favMenu, (0, 0))
+            if self.hamState == 1:
+                screen.blit(favMenu, (0, 0))
 
             # render hidden buttons
-            hamHidden = pygame.Rect(0, 0, 100, 100)
+            hamHidden = pygame.Rect(10, 10, 65, 65)
 
             # render updated time text
             timeText = timeFont.render(
-                self.updatedTimeText, True, [255, 255, 255])
+                self.updatedTimeText, True, [0, 0, 0])
             screen.blit(timeText, (875, 670))
             # )
 
             # renders line graph box
-            lineGraphBox = pygame.Rect(300, 300, 700, 300)
-            pygame.draw.rect(screen, [255, 255, 255], lineGraphBox)
+            lineGraphBox = pygame.Rect(300, 250, 700, 250)
+            pygame.draw.rect(screen, [0, 0, 0], lineGraphBox)
 
             # updates the screen
-            screen.blit(compName, (450, 200))
+            screen.blit(compName, (450, 150))
             pygame.display.update()
 
             # event handler loop
