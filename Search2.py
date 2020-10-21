@@ -22,8 +22,8 @@ it will return True. If unsucessfull it will return false
 def search(stockName):
     url = get_url(stockName.lower())
     print(url)
-    price=current_price(url)
-    if price == "Error. Can't find stock name. Make sure name is correct." or price==None:
+    price = current_price(url)
+    if price == "Error. Can't find stock name. Make sure name is correct." or price == None:
         print("Stock not Found")
         return False
     else:
@@ -47,7 +47,7 @@ Initializes the GUI structures for the search bar
 
 
 def searchBarInitalize():
-    searchBarButton = pygame.Rect(200, 10, 1000, 70)
+    searchBarButton = pygame.Rect(198, 17, 983, 56)
     font = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 50)
     timeFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 30)
     companyFont = pygame.font.Font(
