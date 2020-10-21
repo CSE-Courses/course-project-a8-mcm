@@ -135,5 +135,5 @@ class MainMenu:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
 
 #calls the method to run the program.
-test=MainMenu()
-test.menuInit()
+#test=MainMenu()
+#test.menuInit()

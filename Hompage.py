@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from Search import *
 from TempInfoPage import*
+from LoadingScreen import *
 
 """
 @Authors: Musaiyab Ali, David Forrest
@@ -36,6 +37,7 @@ class MainMenu:
     #checker variables to keep track of states
     insearchbar=0
     hamState=0
+    loadState=1
 
     #the text the user is inputing into the search bar
     searchbarText=""
@@ -59,6 +61,10 @@ class MainMenu:
         
         # width then Height
         screen=pygame.display.set_mode((self.screenWid , self.screenLen))
+
+        #loading images
+        loadImg1 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load1.png")
+        loadImg2 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load2.png")
         
         #background image
         fillerImag=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/Background base.png")
@@ -87,6 +93,10 @@ class MainMenu:
         while True:
             #clears the screen
             screen.fill(0) 
+
+            if self.loadState == 1:
+                self.loadState = 0
+                loadScreen(screen)
 
 
             #renders all of the hidden buttons
