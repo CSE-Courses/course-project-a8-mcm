@@ -18,3 +18,5 @@ Webscrapes yahoo.finance to obtain data for stocks
 Usage:
 As of sprint 1, the main and only usage is done through the favorites_menu.py file. No parameters are required,
 it will simply open a window with the UI for the user. The UI contains the search bar, favorites menu, and the main menu. The user can currently only search for stocks and check the time in which the data was updated.
+
+As of sprint 2, updated main menu, loading screen, refactored main code, display graphs of the stock, and have a stock information page. The graphs show the historical data of the stock. Stock with no information will not show. Loading screen will be used when certain features are taking long to show. 

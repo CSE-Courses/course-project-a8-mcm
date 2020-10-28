@@ -78,7 +78,7 @@ class MainMenu:
         #search bar box
         hompeageIcons=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/hompage Icons.png")
         #button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont, irrellavant = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, irrellavant ,trash= searchBarInitalize()
 
         #favorites menu
         favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
@@ -286,32 +286,36 @@ class MainMenu:
                         self.currentPage=6
                         self.didPageChange=True
                         print(str(self.currentPage))
-                    if numb2.collidepoint(pos) and self.currentPage<5:
-                        self.currentPage+=1
+                    elif numb1.collidepoint(pos):
+                        self.currentPage=1
+                        self.didPageChange=True
+                        print(str(self.currentPage))
+                    if numb2.collidepoint(pos) and self.currentPage<=5:
+                        self.currentPage=2
                         self.didPageChange=True
                         print(str(self.currentPage))
                     elif numb2.collidepoint(pos):
                         self.currentPage=7
                         self.didPageChange=True
                         print(str(self.currentPage))
-                    if numb3.collidepoint(pos) and self.currentPage<5:
-                        self.currentPage+=2
+                    if numb3.collidepoint(pos) and self.currentPage<=5:
+                        self.currentPage=3
                         self.didPageChange=True
                         print(str(self.currentPage))
                     elif numb3.collidepoint(pos):
                         self.currentPage=8
                         self.didPageChange=True
                         print(str(self.currentPage))
-                    if numb4.collidepoint(pos) and self.currentPage<5:
-                        self.currentPage+=3
+                    if numb4.collidepoint(pos) and self.currentPage<=5:
+                        self.currentPage=4
                         self.didPageChange=True
                         print(str(self.currentPage))
                     elif numb4.collidepoint(pos):
                         self.currentPage=9
                         self.didPageChange=True
                         print(str(self.currentPage))
-                    if numb5.collidepoint(pos) and self.currentPage<5:
-                        self.currentPage+=4
+                    if numb5.collidepoint(pos) and self.currentPage<=5:
+                        self.currentPage=5
                         self.didPageChange=True
                         print(str(self.currentPage))
                     elif numb5.collidepoint(pos):
