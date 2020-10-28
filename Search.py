@@ -50,12 +50,13 @@ def searchBarInitalize():
     searchBarButton = pygame.Rect(200, 10, 1000, 70)
     font = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 50)
     timeFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 30)
+    favFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 60)
     companyFont = pygame.font.Font(
         "../course-project-a8-mcm/Fonts/times.ttf", 50)
     t = time.localtime()
     currentTime = time.strftime("%H:%M:%S", t)
     updatedTime = "Stock Data Updated at " + currentTime
-    return searchBarButton, font, updatedTime, timeFont, companyFont
+    return searchBarButton, font, updatedTime, timeFont, companyFont, favFont
 
 
 """

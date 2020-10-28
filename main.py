@@ -25,6 +25,11 @@ class MainRunner:
     # Empty time string
     updatedTimeText = ""
 
+    #favorited stocks
+    fav1 = ""
+    fav2 = ""
+    fav3 = ""
+
     #function for initializing images
     def imgInit(self):
         #loading images
@@ -46,6 +51,22 @@ class MainRunner:
         hamHidden=pygame.Rect(0,0,100,100)
         return hamHidden
 
+    def readFile(self):
+        theFile= open("settings.txt")
+        lineArray= theFile.readlines()
+        for line in lineArray:
+            if "fav1" in line:
+                tmp= line.split("=")
+                self.fav1 = tmp[1]
+            if "fav2" in line:
+                tmp= line.split("=")
+                self.fav2 = tmp[1]
+            if "fav3" in line:
+                tmp= line.split("=")
+                self.fav3 = tmp[1]
+            
+        theFile.close()
+
     def mainScreen(self):
         
         pygame.init()
@@ -60,7 +81,7 @@ class MainRunner:
         loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar = self.imgInit()
 
         #calls method from Search to make button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont = searchBarInitalize()       
+        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, favFont = searchBarInitalize()       
 
         loadScreen(screen) 
 
@@ -92,6 +113,13 @@ class MainRunner:
             #checks if fav menu button is clicked
             if self.hamState==1:
                 screen.blit(favMenu, (0,0))
+                #add any favorited stocks to menu
+                fav1Text = favFont.render(self.fav1, True, [0, 0, 0])
+                screen.blit(fav1Text, (200, 350))
+                fav2Text = favFont.render(self.fav2, True, [0, 0, 0])
+                screen.blit(fav2Text, (200, 475))
+                fav3Text = favFont.render(self.fav3, True, [0, 0, 0])
+                screen.blit(fav3Text, (200, 600))
             
             #updates the screen
             pygame.display.update()
@@ -127,4 +155,5 @@ class MainRunner:
 
                     
 test=MainRunner()
+test.readFile()
 test.mainScreen()
