@@ -275,89 +275,90 @@ class MainRunner:
                #if user clicked left mouse button
                 if event.type==pygame.MOUSEBUTTONDOWN:
                     pos= event.pos
-                    #handle opening the info page when clicking on the stock
-                    if stock1.collidepoint(event.pos):
-                        newPage=InfoPage()
-                        newPage.setStock(self.stockList[self.currentPage*5-5])
-                        newPage.infoPgInit()
-                    if stock2.collidepoint(event.pos):
-                        newPage=InfoPage()
-                        newPage.setStock(self.stockList[self.currentPage*5-4])
-                        newPage.infoPgInit()
-                    if stock3.collidepoint(event.pos):
-                        newPage=InfoPage()
-                        newPage.setStock(self.stockList[self.currentPage*5-3])
-                        newPage.infoPgInit()
-                    if stock4.collidepoint(event.pos):
-                        newPage=InfoPage()
-                        newPage.setStock(self.stockList[self.currentPage*5-2])
-                        newPage.infoPgInit()
-                    if stock5.collidepoint(event.pos):
-                        newPage=InfoPage()
-                        newPage.setStock(self.stockList[self.currentPage*5-1])
-                        newPage.infoPgInit()
+                    if self.hamState==0:
+                        #handle opening the info page when clicking on the stock
+                        if stock1.collidepoint(event.pos):
+                            newPage=InfoPage()
+                            newPage.setStock(self.stockList[self.currentPage*5-5])
+                            newPage.infoPgInit()
+                        if stock2.collidepoint(event.pos):
+                            newPage=InfoPage()
+                            newPage.setStock(self.stockList[self.currentPage*5-4])
+                            newPage.infoPgInit()
+                        if stock3.collidepoint(event.pos):
+                            newPage=InfoPage()
+                            newPage.setStock(self.stockList[self.currentPage*5-3])
+                            newPage.infoPgInit()
+                        if stock4.collidepoint(event.pos):
+                            newPage=InfoPage()
+                            newPage.setStock(self.stockList[self.currentPage*5-2])
+                            newPage.infoPgInit()
+                        if stock5.collidepoint(event.pos):
+                            newPage=InfoPage()
+                            newPage.setStock(self.stockList[self.currentPage*5-1])
+                            newPage.infoPgInit()
 
 
-                        #handles tabing between pages
+                            #handles tabing between pages
 
-                    if goback.collidepoint(pos) and self.currentPage > 1:
-                        self.currentPage-=1
-                        self.didPageChange=True
-                        #print(str(self.currentPage))
-                    if goforward.collidepoint(pos) and self.currentPage<10:
-                        self.currentPage+=1
-                        self.didPageChange=True
-                       # print(str(self.currentPage))
-                    if numb1.collidepoint(pos) and self.currentPage>5:
-                        self.currentPage=6
-                        self.didPageChange=True
-                       # print(str(self.currentPage))
-                    elif numb1.collidepoint(pos):
-                        self.currentPage=1
-                        self.didPageChange=True
-                      #  print(str(self.currentPage))
-                    if numb2.collidepoint(pos) and self.currentPage<=5:
-                        self.currentPage=2
-                        self.didPageChange=True
-                        #print(str(self.currentPage))
-                    elif numb2.collidepoint(pos):
-                        self.currentPage=7
-                        self.didPageChange=True
-                        #print(str(self.currentPage))
-                    if numb3.collidepoint(pos) and self.currentPage<=5:
-                        self.currentPage=3
-                        self.didPageChange=True
-                        #print(str(self.currentPage))
-                    elif numb3.collidepoint(pos):
-                        self.currentPage=8
-                        self.didPageChange=True
-                      #  print(str(self.currentPage))
-                    if numb4.collidepoint(pos) and self.currentPage<=5:
-                        self.currentPage=4
-                        self.didPageChange=True
-                       # print(str(self.currentPage))
-                    elif numb4.collidepoint(pos):
-                        self.currentPage=9
-                        self.didPageChange=True
-                       # print(str(self.currentPage))
-                    if numb5.collidepoint(pos) and self.currentPage<=5:
-                        self.currentPage=5
-                        self.didPageChange=True
-                        #print(str(self.currentPage))
-                    elif numb5.collidepoint(pos):
-                        self.currentPage=10
-                        self.didPageChange=True
-                      #  print(str(self.currentPage))
+                        if goback.collidepoint(pos) and self.currentPage > 1:
+                            self.currentPage-=1
+                            self.didPageChange=True
+                            #print(str(self.currentPage))
+                        if goforward.collidepoint(pos) and self.currentPage<10:
+                            self.currentPage+=1
+                            self.didPageChange=True
+                        # print(str(self.currentPage))
+                        if numb1.collidepoint(pos) and self.currentPage>5:
+                            self.currentPage=6
+                            self.didPageChange=True
+                        # print(str(self.currentPage))
+                        elif numb1.collidepoint(pos):
+                            self.currentPage=1
+                            self.didPageChange=True
+                        #  print(str(self.currentPage))
+                        if numb2.collidepoint(pos) and self.currentPage<=5:
+                            self.currentPage=2
+                            self.didPageChange=True
+                            #print(str(self.currentPage))
+                        elif numb2.collidepoint(pos):
+                            self.currentPage=7
+                            self.didPageChange=True
+                            #print(str(self.currentPage))
+                        if numb3.collidepoint(pos) and self.currentPage<=5:
+                            self.currentPage=3
+                            self.didPageChange=True
+                            #print(str(self.currentPage))
+                        elif numb3.collidepoint(pos):
+                            self.currentPage=8
+                            self.didPageChange=True
+                        #  print(str(self.currentPage))
+                        if numb4.collidepoint(pos) and self.currentPage<=5:
+                            self.currentPage=4
+                            self.didPageChange=True
+                        # print(str(self.currentPage))
+                        elif numb4.collidepoint(pos):
+                            self.currentPage=9
+                            self.didPageChange=True
+                        # print(str(self.currentPage))
+                        if numb5.collidepoint(pos) and self.currentPage<=5:
+                            self.currentPage=5
+                            self.didPageChange=True
+                            #print(str(self.currentPage))
+                        elif numb5.collidepoint(pos):
+                            self.currentPage=10
+                            self.didPageChange=True
+                        #  print(str(self.currentPage))
 
                     if hamHidden.collidepoint(event.pos):
                         if self.hamState==0:
-                            self.hamState=1
-                        else:
-                            self.hamState=0                  
+                            self.hamState=1      
+                        else: 
+                            self.hamState=0                                        
                     elif searchBarButton.collidepoint(event.pos):
                         self.insearchbar=1 
                     else:
-                        self.insearchbar=0                       
+                        self.insearchbar=0               
                 
                 #if user typed into search bar
                 if event.type==pygame.KEYDOWN and self.insearchbar==1:
