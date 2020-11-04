@@ -21,6 +21,7 @@ import mplfinance as mpf
         table data to have the oldest date at the top and newest at the bottom. Then it will save the line graph of close 
         as a line.png.
 """
+
 def closeLine(stock):
     url = get_url(stock)
     write_to_csv(url)
