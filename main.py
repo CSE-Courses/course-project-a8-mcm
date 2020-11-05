@@ -46,28 +46,29 @@ class MainRunner:
         loadImg1 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load1.png")
         loadImg2 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load2.png")
         #background image
-        fillerImag=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/Background base.png")
+        fillerImag=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/white.png")
         #menu button image
-        hamburgermenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/HamburgerMenu.png")
+        hamburgermenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/burger.png")
+        searchIcon = pygame.image.load("../course-project-a8-mcm/images/homepageFiles/searchy3.png")
         #favorites menu image
         favMenu=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
         #search bar image
         searchbar=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         #homepage tab images
-        hompeageIcons=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/hompage Icons.png")
+        hompeageIcons=pygame.image.load("../course-project-a8-mcm/images/homepageFiles/homePageIcons.png")
 
-        return loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar, hompeageIcons
+        return loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar, hompeageIcons,searchIcon
 
     def buttonInit(self):
         #render hidden buttons
         hamHidden=pygame.Rect(0,0,100,100)
 
         #render buttons for stocks
-        stock1=pygame.Rect(20, 110, 1240, 90)
-        stock2=pygame.Rect(20, 220, 1240, 90)
-        stock3=pygame.Rect(20, 330, 1240, 90)
-        stock4=pygame.Rect(20, 440, 1240, 90)
-        stock5=pygame.Rect(20, 550, 1240, 90)
+        stock1 = pygame.Rect(200, 145, 975, 50)
+        stock2 = pygame.Rect(200, 240, 975, 70)
+        stock3 = pygame.Rect(200, 355, 975, 65)
+        stock4 = pygame.Rect(200, 470, 975, 60)
+        stock5 = pygame.Rect(200, 580, 975, 60)
 
         #render buttons for switching between pages
         goback=pygame.Rect(20, 670, 30, 20)
@@ -103,7 +104,7 @@ class MainRunner:
 
     def fontInit(self):
         pagenumber=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",25)
-        stockfont=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",65)
+        stockfont=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",40)
         return pagenumber, stockfont
 
     def mainScreen(self):
@@ -117,14 +118,14 @@ class MainRunner:
         screen=pygame.display.set_mode((self.screenWid , self.screenLen))    
         
         #calls method to initialize all the images
-        loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar, homepageIcons = self.imgInit()
+        loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar, homepageIcons, searchIcon = self.imgInit()
 
         #calls method from Search to make button and font for search bar
         searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, favFont = searchBarInitalize() 
 
         #calls method to initalize make the buttons
         hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B, fav2B, fav3B =self.buttonInit()
-       
+        searchBarButton = pygame.Rect(198, 17, 983, 56)
        #calls method to initalize fonts
         pagenumber, stockfont=self.fontInit()
         loadScreen(screen) 
@@ -135,24 +136,27 @@ class MainRunner:
             screen.fill(0) 
 
             #renders all of the hidden buttons
-            pygame.draw.rect(screen,[0,0,0],searchBarButton)
+            
+            pygame.draw.rect(screen, [225, 225, 225], stock1)
+            pygame.draw.rect(screen, [225, 225, 225], stock2)
+            pygame.draw.rect(screen, [0, 0, 0], stock3)
+            pygame.draw.rect(screen, [0, 0, 0], stock4)
+            pygame.draw.rect(screen, [0, 0, 0], stock5)
 
 
             #renders background and menu buttons
             screen.blit(fillerImag, (0,0))
+            pygame.draw.rect(screen,[0,0,0],searchBarButton)
             screen.blit(searchbar,(0,0))
+            screen.blit(searchIcon, (205, 28))
             screen.blit(hamburgermenu,(0,0))
 
             #render search bar text
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
-            screen.blit(searchtext,(200,15))
+            screen.blit(searchtext,(250,15))
 
             #renders hompage hiddenButtons
-            pygame.draw.rect(screen,[0,0,0],stock1)
-            pygame.draw.rect(screen,[0,0,0],stock2)
-            pygame.draw.rect(screen,[0,0,0],stock3)
-            pygame.draw.rect(screen,[0,0,0],stock4)
-            pygame.draw.rect(screen,[0,0,0],stock5)
+            
 
             #renders hompage page switching buttons
             pygame.draw.rect(screen,[255,0,0],numb1)
@@ -170,11 +174,11 @@ class MainRunner:
             thirdStock=stockfont.render(self.stockList[self.currentPage*5-3], True,[0,0,0])
             fourthStock=stockfont.render(self.stockList[self.currentPage*5-2], True,[0,0,0])
             fifthStock=stockfont.render(self.stockList[self.currentPage*5-1], True,[0,0,0])
-            screen.blit(firstStock,(30, 110))
-            screen.blit(secondStock,(30, 220))
-            screen.blit(thirdStock,(30, 330))
-            screen.blit(fourthStock,(30, 440))
-            screen.blit(fifthStock,(30, 550))
+            screen.blit(firstStock, (205, 155))
+            screen.blit(secondStock, (205, 265))
+            screen.blit(thirdStock, (205, 375))
+            screen.blit(fourthStock, (205, 485))
+            screen.blit(fifthStock, (205, 595))
 
             #handles page switching
             if self.currentPage<6:
