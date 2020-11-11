@@ -82,4 +82,4 @@ def MACD(stock):
     plt.plot(macd, label="MACD", color = '#DB33FF')
     plt.plot(exp3, label='Signal Line', color='#33DFFF')
     plt.legend(loc='upper left')
-    return(plt.savefig("macd.png"))
+    plt.savefig("macd.png")
