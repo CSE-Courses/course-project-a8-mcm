@@ -10,6 +10,15 @@ import csv
 from bs4 import BeautifulSoup
 
 """
+    stripToFloat(int num):
+            strips comma and change the string to float.
+"""
+def stripToFloat(data, num):
+    data[num] = data[num].replace(",", '')
+    data[num] = float(data[num])
+    return data[num]
+
+"""
     get_url(stock):
         Looks up the url that was given as an arugment. The argument has to be a string.
         Will return the url for webscraping.
@@ -91,6 +100,11 @@ def get_data_nodiv(url):
         if (data[3] =='Dividend' or data[3] == 'Stock Split'):
             continue
         else:
+            stripToFloat(data, 1)
+            stripToFloat(data, 2)
+            stripToFloat(data, 3)
+            stripToFloat(data, 4)
+            stripToFloat(data, 5)
             data[6] = data[6].replace(",", '')                
             data[6] = int(data[6])
             no_div.append(data)
