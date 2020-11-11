@@ -86,6 +86,7 @@ class MainRunner:
 
         return hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B,fav2B, fav3B
 
+    #function that reads settings file and saves the values to fav1, fav2, and fav3
     def readFile(self):
         theFile= open("settings.txt")
         lineArray= theFile.readlines()
@@ -101,6 +102,25 @@ class MainRunner:
                 self.fav3 = tmp[1]
             
         theFile.close()
+
+    #function that writes to the settings file, updates fav1, fav2, and fav3
+    #str1 is which fav to update, str2 is the new stock
+    def writeFile(self, str1, str2):
+
+        if str1 == "fav1":
+            self.fav1 = str2
+        if str1 == "fav2":
+            self.fav2 = str2
+        if str1 == "fav3":
+            self.fav3 = str2
+
+        theFile= open("settings.txt", "w")
+        theFile.write("fav1=" + self.fav1 + "=\n")
+        theFile.write("fav2=" + self.fav2 + "=\n")
+        theFile.write("fav3=" + self.fav3 + "=\n")
+
+        theFile.close()
+
 
     def fontInit(self):
         pagenumber=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",25)
