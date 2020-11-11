@@ -50,7 +50,7 @@ def readTableClose(stock):
 def closeLine(stock):
     df = readTableClose(stock)
     df.plot(y="Close", ylabel="Price", figsize=(10,8), title = get_company_name(get_url(stock)), rot=90)
-    plt.savefig("line.png")
+    return(plt.savefig("line.png"))
     
 """
     candleStick(stock):
@@ -60,7 +60,7 @@ def closeLine(stock):
 """
 def candleStick(stock):
     df = readTable(stock)
-    mpf.plot(df, type='candle', style='charles', title=get_company_name(get_url(stock)), ylabel="Price", savefig="candlestick.png")
+    return(mpf.plot(df, type='candle', style='charles', title=get_company_name(get_url(stock)), ylabel="Price", savefig="candlestick.png"))
     
 """
     def MACD(string stock):
@@ -82,4 +82,4 @@ def MACD(stock):
     plt.plot(macd, label="MACD", color = '#DB33FF')
     plt.plot(exp3, label='Signal Line', color='#33DFFF')
     plt.legend(loc='upper left')
-    plt.savefig("macd.png")
+    return(plt.savefig("macd.png"))
