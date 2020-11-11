@@ -3,6 +3,7 @@ class writeTest:
     fav2="WMT"
     fav3="AMZN"
 
+    #unit test for writeFile
     def writeFile(self, str1, str2):
 
         if str1 == "fav1":
