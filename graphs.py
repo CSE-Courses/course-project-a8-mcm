@@ -83,3 +83,6 @@ def MACD(stock):
     plt.plot(exp3, label='Signal Line', color='#33DFFF')
     plt.legend(loc='upper left')
     return(plt.savefig("macd.png"))
+
+candleStick("btc-usd")
+MACD("btc-usd")
