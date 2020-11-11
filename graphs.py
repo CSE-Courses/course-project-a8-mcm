@@ -66,7 +66,7 @@ def candleStick(stock):
     def MACD(string stock):
         Takes in a string to be useds on the function read table which then can be used to calculations
         for MACD. It gets the exponential moving average and calculates the signal line and shows when to
-        buy or put.
+        buy or put. When MACD line crosses over signal line than buy else put.
 """
 def MACD(stock):
     df = readTableClose(stock)
@@ -83,7 +83,3 @@ def MACD(stock):
     plt.plot(exp3, label='Signal Line', color='#33DFFF')
     plt.legend(loc='upper left')
     return(plt.savefig("macd.png"))
-
-closeLine("aapl")
-candleStick("aapl")
-MACD("aapl")
