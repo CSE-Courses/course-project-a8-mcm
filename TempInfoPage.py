@@ -75,10 +75,10 @@ class InfoPage:
         backButton = pygame.image.load(
             "../course-project-a8-mcm/images/homepageFiles/back2.png")
         
-        candleStickGraph= pygame.image.load("../course-project-a8-mcm/candlestick.png")
+        candleStickGraph= pygame.image.load("../course-project-a8-mcm/FUBUKIv2.png")
         # candleStickGraph=pygame.transform.scale(candleStickGraph,(160*4,115*4))
         # button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, trash = searchBarInitalize()
 
         backButtonHiddenButton=pygame.Rect(10, 675, 35, 680)
 
