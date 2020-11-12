@@ -1,8 +1,9 @@
 import pygame
 from pygame.locals import *
+from stock_info_page import*
 from Search import *
 from LoadingScreen import *
-from TempInfoPage import*
+
 
 """
 @Authors: Musaiyab Ali, David Forrest
@@ -128,6 +129,7 @@ class MainRunner:
         return pagenumber, stockfont
 
     def mainScreen(self):
+
         
         pygame.init()
 
