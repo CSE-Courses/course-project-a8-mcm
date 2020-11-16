@@ -1,3 +1,3 @@
 fav1=AAPL=
 fav2=WMT=
-fav3=CSCO=
+fav3=AMZN=

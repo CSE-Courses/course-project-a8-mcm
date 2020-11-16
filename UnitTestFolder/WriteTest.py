@@ -1,7 +1,7 @@
 class writeTest:
     fav1="AAPL"
     fav2="WMT"
-    fav3="AMZN"
+    fav3="CSCO"
 
     #unit test for writeFile
     def writeFile(self, str1, str2):
@@ -21,4 +21,4 @@ class writeTest:
         theFile.close()
 
 test = writeTest()
-test.writeFile("fav3", "CSCO")
+test.writeFile("fav3", "AMZN")
