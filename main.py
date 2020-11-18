@@ -105,15 +105,16 @@ class MainRunner:
         theFile.close()
 
     #function that writes to the settings file, updates fav1, fav2, and fav3
-    #str1 is which fav to update, str2 is the new stock
-    def writeFile(self, str1, str2):
-
-        if str1 == "fav1":
-            self.fav1 = str2
-        if str1 == "fav2":
-            self.fav2 = str2
-        if str1 == "fav3":
-            self.fav3 = str2
+    #str is the stock that will be added to favorites
+    def writeFile(self, str):
+        if self.fav1 != "" and self.fav2 != "" and self.fav3 != "":
+            print("Favorite list is full!")
+        elif self.fav1 == "":
+            self.fav1 = str
+        elif self.fav2 == "":
+            self.fav2 = str
+        elif self.fav3 == "":
+            self.fav3 = str
 
         theFile= open("settings.txt", "w")
         theFile.write("fav1=" + self.fav1 + "=\n")
@@ -122,6 +123,21 @@ class MainRunner:
 
         theFile.close()
 
+    #str is either fav1, fav2, or fav3, will be deleted
+    def delFav(self, str):
+        if str == "fav1":
+            self.fav1 = ""
+        if str == "fav2":
+            self.fav2 = ""
+        if str == "fav3":
+            self.fav3 = ""
+
+        theFile= open("settings.txt", "w")
+        theFile.write("fav1=" + self.fav1 + "=\n")
+        theFile.write("fav2=" + self.fav2 + "=\n")
+        theFile.write("fav3=" + self.fav3 + "=\n")
+
+        theFile.close()
 
     def fontInit(self):
         pagenumber=pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf",25)
