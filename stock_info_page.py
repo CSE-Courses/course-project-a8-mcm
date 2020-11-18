@@ -32,18 +32,24 @@ class InfoPage:
     # Company name
     companyName = ""
 
-    #stock to display
-    stockToDisplay=""
+    # stock to display
+    stockToDisplay = ""
 
-    #wheather user inputted a new stock
-    updatedStock=1
+    # Labels
+    currentTrend = "Stock Data"
+    ai = "Projected Growth"
+
+    # wheather user inputted a new stock
+    updatedStock = 1
 
     stockList = ["GILD", "WMT", "UNP", "GPRO", "HPQ", "V", "CSCO", "SLB", "AMGN", "BA", "TGT", "COP", "CMCSA", "BMY", "CVX", "VZ", "BP", "T", "UNH", "MCD", "PFE", "ABT", "FB", "DIS", "MMM",
                  "XOM", "ORCL", "PEP", "HD", "JPM", "INTC", "WFC", "MRK", "KO", "AMZN", "PG", "BRKB", "GOOGL", "GM", "JNJ", "MO", "IBM", "GE", "MSFT", "AAPL", "NVDA", "AMD", "GE", "NTDOF", "SNE"]
 
     def setStock(self, stock):
-        self.stockToDisplay=stock
-
+        self.stockToDisplay = stock
+        temp = get_url(stock)
+        self.companyName = get_company_name(temp)
+        self.updatedTimeText = timeStamp()
 
     def infoPgInit(self):
 
@@ -79,15 +85,17 @@ class InfoPage:
 
         # button and font for search bar
         searchBarButton, searchBarFont, updatedTime, timeFont, companyFont = searchBarInitalize()
-        
-        #CandlestickGraph
-        candleStickGraph= pygame.image.load("../course-project-a8-mcm/FUBUKIv2.png")
-        mcdonaldsGraph= pygame.image.load("../course-project-a8-mcm/FUBUKIv2.png")
 
+        # CandlestickGraph
+        candleStickGraph = pygame.image.load(
+            "../course-project-a8-mcm/FUBUKIv2.png")
+        mcdonaldsGraph = pygame.image.load(
+            "../course-project-a8-mcm/FUBUKIv2.png")
 
         # leftHidden = pygame.Rect(1100, 600 ,1110, 610)
         # rightHidden = pygame.Rect(985, 520, 15, 16)
-        backHidden= pygame.Rect(0, 650, 60, 720)
+        backHidden = pygame.Rect(0, 650, 60, 720)
+        # leftBorder = pygame.Rect(30, 210, 630 ,610)
 
         # favorites menu
         favMenu = pygame.image.load(
@@ -99,11 +107,11 @@ class InfoPage:
             screen.fill(0)
 
             # renders background and menu buttons
-            pygame.draw.rect(screen, [255,0,0], backHidden)
+            pygame.draw.rect(screen, [255, 0, 0], backHidden)
             screen.blit(fillerImag, (0, 0))
             # renders all of the hidden buttons
             pygame.draw.rect(screen, [0, 0, 0], searchBarButton)
-           
+
             screen.blit(searchbar, (0, 0))
             screen.blit(searchIcon, (205, 28))
             # screen.blit(hamburgermenu, (10, 15))
@@ -122,16 +130,21 @@ class InfoPage:
             compName = companyFont.render(
                 self.companyName, True, [0, 0, 0])
 
+            current = timeFont.render(
+                self.currentTrend, True, [0, 0, 0]
+            )
+            predict = timeFont.render(
+                self.ai, True, [0, 0, 0]
+            )
+
             # render hidden buttons
             # hamHidden = pygame.Rect(10, 10, 65, 65)
 
+            timeFont2 = pygame.font.Font(
+                "../course-project-a8-mcm/Fonts/times.ttf", 20)
             # render updated time text
-            timeText = timeFont.render(
+            timeText = timeFont2.render(
                 self.updatedTimeText, True, [0, 0, 0])
-            screen.blit(timeText, (875, 670))
-
-            
-
             # )
 
             # renders line graph box
@@ -139,19 +152,25 @@ class InfoPage:
             # pygame.draw.rect(screen, [0, 0, 0], lineGraphBox)
 
             # updates the screen
-            # screen.blit(compName, (450, 150))
 
-            if self.updatedStock==0 :
-                tempgraph=pygame.transform.scale(candleStickGraph,(600,432))
-                tempgraph2=pygame.transform.scale(mcdonaldsGraph,(600,432))
-                screen.blit(tempgraph,(0,200))
-                screen.blit(tempgraph2, (500, 200))
-            
+            if self.updatedStock == 0:
+                tempgraph = pygame.transform.scale(
+                    candleStickGraph, (600, 432))
+                tempgraph2 = pygame.transform.scale(mcdonaldsGraph, (600, 432))
+                leftBorder = pygame.Rect(35, 195, 705, 442)
+                pygame.draw.rect(screen, [0, 0, 0], leftBorder)
+                screen.blit(tempgraph, (40, 200))
+                rightBorder = pygame.Rect(620, 195, 610, 442)
+                pygame.draw.rect(screen, [0, 0, 0], rightBorder)
+                screen.blit(tempgraph2, (625, 200))
+                screen.blit(current, (290, 640))
+                screen.blit(predict, (830, 640))
+                screen.blit(compName, (20, 120))
+                screen.blit(timeText, (1000, 690))
+
             # if self.hamState == 1:
             #     screen.blit(favMenu, (0, 0))
-            
-            
-        
+
             pygame.display.update()
 
             # event handler loop
@@ -186,21 +205,22 @@ class InfoPage:
                         if search(self.searchbarText):
                             temp = get_url(self.searchbarText)
                             self.companyName = get_company_name(temp)
-                            self.stockToDisplay=self.searchbarText
+                            self.stockToDisplay = self.searchbarText
                             self.searchbarText = ""
                             self.updatedTimeText = timeStamp()
-                            self.updatedStock=1
+                            self.updatedStock = 1
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(
                             event, self.searchbarText)
-           
-            if self.updatedStock==1:
-                self.updatedStock=0
+
+            if self.updatedStock == 1:
+                self.updatedStock = 0
                 candleStick(self.stockToDisplay)
                 MACD(self.stockToDisplay)
-                candleStickGraph=pygame.image.load("../course-project-a8-mcm/candlestick.png")
-                mcdonaldsGraph=pygame.image.load("../course-project-a8-mcm/macd.png")
-
+                candleStickGraph = pygame.image.load(
+                    "../course-project-a8-mcm/candlestick.png")
+                mcdonaldsGraph = pygame.image.load(
+                    "../course-project-a8-mcm/macd.png")
 
 
 # calls the method to run the program
