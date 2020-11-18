@@ -123,7 +123,7 @@ class MainRunner:
 
         theFile.close()
 
-    #str is either fav1, fav2, or fav3
+    #str is either fav1, fav2, or fav3, will be deleted
     def delFav(self, str):
         if str == "fav1":
             self.fav1 = ""
