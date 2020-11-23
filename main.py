@@ -85,7 +85,12 @@ class MainRunner:
         fav2B=pygame.Rect(200, 450, 175, 100)
         fav3B=pygame.Rect(200, 575, 175, 100)
 
-        return hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B,fav2B, fav3B
+        #render delete fav buttons
+        delFav1=pygame.Rect(400, 325, 100, 100)
+        delFav2=pygame.Rect(400, 450, 100, 100)
+        delFav3=pygame.Rect(400, 575, 100, 100)
+
+        return hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B,fav2B, fav3B, delFav1, delFav2, delFav3
 
     #function that reads settings file and saves the values to fav1, fav2, and fav3
     def readFile(self):
@@ -162,7 +167,7 @@ class MainRunner:
         searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, favFont = searchBarInitalize() 
 
         #calls method to initalize make the buttons
-        hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B, fav2B, fav3B =self.buttonInit()
+        hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B, fav2B, fav3B, delFav1, delFav2, delFav3 =self.buttonInit()
         searchBarButton = pygame.Rect(198, 17, 983, 56)
        #calls method to initalize fonts
         pagenumber, stockfont=self.fontInit()
@@ -172,6 +177,9 @@ class MainRunner:
         while True:
             #clears the screen
             screen.fill(0) 
+
+            #update fav variables by reading file
+            self.readFile()
 
             #renders all of the hidden buttons
             
@@ -301,18 +309,21 @@ class MainRunner:
             if self.hamState==1:
                 screen.blit(favMenu, (0,0))
                 #add any favorited stocks to menu
-                pygame.draw.rect(screen,[0,0,0],fav1B)
-                pygame.draw.rect(screen,[0,0,0],fav2B)
-                pygame.draw.rect(screen,[0,0,0],fav3B)
-                fav1Text = favFont.render(self.fav1, True, [255, 255, 255])
-                screen.blit(fav1Text, (200, 350))
-                fav2Text = favFont.render(self.fav2, True, [255, 255, 255])
-                screen.blit(fav2Text, (200, 475))
-                fav3Text = favFont.render(self.fav3, True, [255, 255, 255])
-                screen.blit(fav3Text, (200, 600))
-                #print(self.fav1)
-                #print(self.fav2)
-                #print(self.fav3)
+                if self.fav1 != "":
+                    pygame.draw.rect(screen,[0,0,0],fav1B)
+                    fav1Text = favFont.render(self.fav1, True, [255, 255, 255])
+                    screen.blit(fav1Text, (200, 350))
+                    pygame.draw.rect(screen,[255,0,0],delFav1)
+                if self.fav2 != "":
+                    pygame.draw.rect(screen,[0,0,0],fav2B)
+                    fav2Text = favFont.render(self.fav2, True, [255, 255, 255])
+                    screen.blit(fav2Text, (200, 475))
+                    pygame.draw.rect(screen,[255,0,0],delFav2)
+                if self.fav3 != "":
+                    pygame.draw.rect(screen,[0,0,0],fav3B)
+                    fav3Text = favFont.render(self.fav3, True, [255, 255, 255])
+                    screen.blit(fav3Text, (200, 600))
+                    pygame.draw.rect(screen,[255,0,0],delFav3)                               
             
             #updates the screen
             pygame.display.update()
@@ -403,18 +414,24 @@ class MainRunner:
                             self.didPageChange=True
                         #  print(str(self.currentPage))
                     if self.hamState == 1:
-                        if fav1B.collidepoint(event.pos):
+                        if fav1B.collidepoint(event.pos) and self.fav1 != "":
                             newPage=InfoPage()
                             newPage.setStock(self.fav1)
                             newPage.infoPgInit()
-                        if fav2B.collidepoint(event.pos):
+                        if fav2B.collidepoint(event.pos) and self.fav2 != "":
                             newPage=InfoPage()
                             newPage.setStock(self.fav2)
                             newPage.infoPgInit()
-                        if fav3B.collidepoint(event.pos):
+                        if fav3B.collidepoint(event.pos) and self.fav3 != "":
                             newPage=InfoPage()
                             newPage.setStock(self.fav3)
                             newPage.infoPgInit()
+                        if delFav1.collidepoint(event.pos):
+                            self.delFav("fav1") 
+                        if delFav2.collidepoint(event.pos):
+                            self.delFav("fav2")
+                        if delFav3.collidepoint(event.pos):
+                            self.delFav("fav3")
 
                     if hamHidden.collidepoint(event.pos):
                         if self.hamState==0:
