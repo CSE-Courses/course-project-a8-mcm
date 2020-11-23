@@ -27,6 +27,8 @@ class MainRunner:
     # Empty time string
     updatedTimeText = ""
 
+    autoFill=""
+
     #favorited stocks
     fav1 = ""
     fav2 = ""
@@ -173,6 +175,8 @@ class MainRunner:
         pagenumber, stockfont=self.fontInit()
         loadScreen(screen) 
 
+        autoFillFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 50)
+
         #screen while program is running
         while True:
             #clears the screen
@@ -200,9 +204,10 @@ class MainRunner:
             #render search bar text
             searchtext=searchBarFont.render(self.searchbarText,True,[0,0,0])
             screen.blit(searchtext,(250,15))
-
-            #renders hompage hiddenButtons
-            
+            if self.autoFill !="":
+                autoFillText=autoFillFont.render((self.autoFill + "?"),True, [192,192,192])
+                #renders hompage hiddenButtons
+                screen.blit(autoFillText, (750,15))
 
             #renders hompage page switching buttons
             pygame.draw.rect(screen,[255,0,0],numb1)
@@ -451,9 +456,24 @@ class MainRunner:
                             newPage.setStock(self.searchbarText)
                             newPage.infoPgInit()
                             self.searchbarText=""
+                            self.autoFill=""
                             self.updatedTimeText = timeStamp()
+                    elif event.unicode=="\t":
+                        newPage=InfoPage()
+                        newPage.setStock(self.autoFill)
+                        newPage.infoPgInit()
+                        self.searchbarText=""
+                        self.autoFill=""
+                        self.updatedTimeText = timeStamp()
+                        
                     else:
                         self.searchbarText = updateSearchBarOnKeyPress(event, self.searchbarText)
+                        for stockName in self.stockList:
+                           # print(stockName)
+                            if self.searchbarText.upper() in stockName:
+                                print ("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                                self.autoFill=stockName
+                                break
 
                     
 test=MainRunner()

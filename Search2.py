@@ -70,10 +70,10 @@ def updateSearchBarOnKeyPress(theGuiEvent, searchBarText):
     if theGuiEvent.unicode == "\b":
         return searchBarText[:-1]
 
-    elif theGuiEvent.unicode.isalpha() and len(searchBarText) <= 10 or theGuiEvent.unicode.isdigit() and len(searchBarText) <= 10:
+    elif theGuiEvent.unicode.isalpha() and len(searchBarText) <= 5 or theGuiEvent.unicode.isdigit() and len(searchBarText) <= 5:
         return searchBarText+theGuiEvent.unicode
     else:
-        if len(searchBarText) >= 10:
+        if len(searchBarText) >= 5:
             print("max length of string reached")
 
         return searchBarText
