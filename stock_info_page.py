@@ -259,12 +259,13 @@ class InfoPage:
 
             if self.updatedStock == 1:
                 self.updatedStock = 0
-                candleStick(self.stockToDisplay)
-                MACD(self.stockToDisplay)
-                candleStickGraph = pygame.image.load(
-                    "../course-project-a8-mcm/candlestick.png")
-                mcdonaldsGraph = pygame.image.load(
-                    "../course-project-a8-mcm/macd.png")
+                if self.stockToDisplay!="":
+                    candleStick(self.stockToDisplay)
+                    MACD(self.stockToDisplay)
+                    candleStickGraph = pygame.image.load(
+                        "../course-project-a8-mcm/candlestick.png")
+                    mcdonaldsGraph = pygame.image.load(
+                        "../course-project-a8-mcm/macd.png")
 
 
 # calls the method to run the program
