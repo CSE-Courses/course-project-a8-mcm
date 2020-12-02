@@ -41,6 +41,14 @@ def readTableClose(stock):
     df = df.reindex(index=df.index[::-1])
     return df
 
+def readTableDate(stock):
+    url = get_url(stock)
+    write_to_csv(url)
+    
+    df = pd.read_csv('output.csv', parse_dates=True, usecols = ["Date", "Close"])
+    df = df.reindex(index=df.index[::-1])
+    return df
+
 """
     closeLine(stock):
         Converts the stock data into a csv file. Then read data into a dataframe using panda. It reverses the

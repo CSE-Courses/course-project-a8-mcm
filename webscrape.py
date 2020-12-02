@@ -67,8 +67,8 @@ def get_header(url):
     for heading in history_table_heading:
         headings.append(heading.get_text(separator='|'))
     headings = headings[0].split("|")
-    headings[4] = "Close"
-    headings[5] = "Adj Close"
+    headings[5] = "Close"
+    headings[6] = "Adj Close"
     return headings
 
 """
@@ -225,3 +225,4 @@ def write_to_csv(url):
         writer.writerow(header)
         for data in datas:
             writer.writerow(data)
+            
