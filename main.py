@@ -90,7 +90,7 @@ class MainRunner:
         #render delete fav buttons
         delFav1=pygame.Rect(400, 325, 100, 100)
         delFav2=pygame.Rect(400, 450, 100, 100)
-        delFav3=pygame.Rect(400, 575, 100, 100)
+        delFav3=pygame.Rect(400, 575, 100, 100)        
 
         return hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B,fav2B, fav3B, delFav1, delFav2, delFav3
 
