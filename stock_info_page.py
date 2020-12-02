@@ -20,6 +20,11 @@ class InfoPage:
     insearchbar = 0
     hamState = 0
 
+    #fav stocks
+    fav1 = ""
+    fav2 = ""
+    fav3 = ""
+
     # the text the user is inputing into the search bar
     searchbarText = ""
 
@@ -50,6 +55,39 @@ class InfoPage:
         temp = get_url(stock)
         self.companyName = get_company_name(temp)
         self.updatedTimeText = timeStamp()
+
+    def readFile(self):
+        theFile= open("settings.txt")
+        lineArray= theFile.readlines()
+        for line in lineArray:
+            if "fav1" in line:
+                tmp= line.split("=")
+                self.fav1 = tmp[1]
+            if "fav2" in line:
+                tmp= line.split("=")
+                self.fav2 = tmp[1]
+            if "fav3" in line:
+                tmp= line.split("=")
+                self.fav3 = tmp[1]
+            
+        theFile.close()
+
+    def writeFile(self, str):
+        if self.fav1 != "" and self.fav2 != "" and self.fav3 != "":
+            print("Favorite list is full!")
+        elif self.fav1 == "":
+            self.fav1 = str
+        elif self.fav2 == "":
+            self.fav2 = str
+        elif self.fav3 == "":
+            self.fav3 = str
+
+        theFile= open("settings.txt", "w")
+        theFile.write("fav1=" + self.fav1 + "=\n")
+        theFile.write("fav2=" + self.fav2 + "=\n")
+        theFile.write("fav3=" + self.fav3 + "=\n")
+
+        theFile.close()
 
     def infoPgInit(self):
 
@@ -97,14 +135,16 @@ class InfoPage:
         backHidden = pygame.Rect(0, 650, 60, 720)
         # leftBorder = pygame.Rect(30, 210, 630 ,610)
 
-        # favorites menu
-        favMenu = pygame.image.load(
-            "../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        # favorites menu and button
+        favMenu = pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
+        addFav=pygame.Rect(60, 678, 50, 25)
 
         # screen while program is running
         while True:
             # clears the screen
             screen.fill(0)
+
+            self.readFile()
 
             # renders background and menu buttons
             pygame.draw.rect(screen, [255, 0, 0], backHidden)
@@ -171,6 +211,8 @@ class InfoPage:
             # if self.hamState == 1:
             #     screen.blit(favMenu, (0, 0))
 
+            pygame.draw.rect(screen,[0,255,0],addFav)
+
             pygame.display.update()
 
             # event handler loop
@@ -198,6 +240,8 @@ class InfoPage:
 
                     if backHidden.collidepoint(event.pos):
                         return 0
+                    if addFav.collidepoint(event.pos):
+                        self.writeFile(self.stockToDisplay)
 
                 # if user typed into search bar
                 if event.type == pygame.KEYDOWN and self.insearchbar == 1:
@@ -215,12 +259,13 @@ class InfoPage:
 
             if self.updatedStock == 1:
                 self.updatedStock = 0
-                candleStick(self.stockToDisplay)
-                MACD(self.stockToDisplay)
-                candleStickGraph = pygame.image.load(
-                    "../course-project-a8-mcm/candlestick.png")
-                mcdonaldsGraph = pygame.image.load(
-                    "../course-project-a8-mcm/macd.png")
+                if self.stockToDisplay!="":
+                    candleStick(self.stockToDisplay)
+                    MACD(self.stockToDisplay)
+                    candleStickGraph = pygame.image.load(
+                        "../course-project-a8-mcm/candlestick.png")
+                    mcdonaldsGraph = pygame.image.load(
+                        "../course-project-a8-mcm/macd.png")
 
 
 # calls the method to run the program

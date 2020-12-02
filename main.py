@@ -96,6 +96,7 @@ class MainRunner:
         fav2B = pygame.Rect(40, 475, 550, 60)
         fav3B = pygame.Rect(40, 600, 550, 60)
 
+
         # render delete fav buttons
         delFav1 = pygame.Rect(530, 355, 50, 50)
         delFav2 = pygame.Rect(530, 480, 50, 50)
