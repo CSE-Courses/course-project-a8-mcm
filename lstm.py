@@ -96,14 +96,4 @@ def lstmForecast(stock):
     data.index = data.Date
     data.drop("Date", axis=1, inplace=True)
     
-    # plot
-    old = len(newData) - 1
-    prev = data[:old]
-    pred = data[old:]
-    plt.figure(figsize=(16,8))
-    plt.xticks(rotation=90)
-    plt.plot(prev['Close'])
-    plt.plot(pred['Close'])
-    return(plt.savefig("lstm.png"))
-
-lstmForecast("aapl")
+    return data
