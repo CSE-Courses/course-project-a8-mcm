@@ -92,15 +92,15 @@ class MainRunner:
         goforward = pygame.Rect(260, 670, 30, 20)
 
         # render fav menu buttons
-        fav1B = pygame.Rect(40, 350, 550, 60)
-        fav2B = pygame.Rect(40, 475, 550, 60)
-        fav3B = pygame.Rect(40, 600, 550, 60)
+        fav1B = pygame.Rect(40, 350, 490, 60)
+        fav2B = pygame.Rect(40, 475, 490, 60)
+        fav3B = pygame.Rect(40, 600, 490, 60)
 
 
         # render delete fav buttons
-        delFav1 = pygame.Rect(530, 355, 50, 50)
-        delFav2 = pygame.Rect(530, 480, 50, 50)
-        delFav3 = pygame.Rect(530, 605, 50, 50)
+        delFav1 = pygame.Rect(530, 350, 50, 60)
+        delFav2 = pygame.Rect(530, 475, 50, 60)
+        delFav3 = pygame.Rect(530, 600, 50, 60)
 
         return hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B, fav2B, fav3B, delFav1, delFav2, delFav3
 
@@ -177,7 +177,7 @@ class MainRunner:
         loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar, homepageIcons, searchIcon = self.imgInit()
 
         # calls method from Search to make button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, favFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, favFont, verFont = searchBarInitalize()
 
         # calls method to initalize make the buttons
         hamHidden, stock1, stock2, stock3, stock4, stock5, goback, numb1, numb2, numb3, numb4, numb5, goforward, fav1B, fav2B, fav3B, delFav1, delFav2, delFav3 = self.buttonInit()

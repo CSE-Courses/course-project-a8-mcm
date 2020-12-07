@@ -25,6 +25,9 @@ class InfoPage:
     fav2 = ""
     fav3 = ""
 
+    #verify favorited state
+    verState = 2
+
     # the text the user is inputing into the search bar
     searchbarText = ""
 
@@ -74,13 +77,14 @@ class InfoPage:
 
     def writeFile(self, str):
         if self.fav1 != "" and self.fav2 != "" and self.fav3 != "":
-            print("Favorite list is full!")
+            print("Favorite list is full")
+            return 1
         elif self.fav1 == "":
             self.fav1 = str
         elif self.fav2 == "":
             self.fav2 = str
         elif self.fav3 == "":
-            self.fav3 = str
+            self.fav3 = str            
 
         theFile= open("settings.txt", "w")
         theFile.write("fav1=" + self.fav1 + "=\n")
@@ -88,6 +92,7 @@ class InfoPage:
         theFile.write("fav3=" + self.fav3 + "=\n")
 
         theFile.close()
+        return 0
 
     def infoPgInit(self):
 
@@ -122,7 +127,7 @@ class InfoPage:
             "../course-project-a8-mcm/images/homepageFiles/back2.png")
 
         # button and font for search bar
-        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont = searchBarInitalize()
+        searchBarButton, searchBarFont, updatedTime, timeFont, companyFont, favFont, verFont = searchBarInitalize()
 
         # CandlestickGraph
         candleStickGraph = pygame.image.load(
@@ -213,6 +218,13 @@ class InfoPage:
 
             pygame.draw.rect(screen,[0,255,0],addFav)
 
+            if self.verState == 1:
+                verText = verFont.render("Favorite list is full", True, [0, 0, 0])
+                screen.blit(verText, (150, 678))
+            elif self.verState == 0:
+                verText = verFont.render(self.stockToDisplay + " has been added to favorite list", True, [0, 0, 0])
+                screen.blit(verText, (150, 678))
+
             pygame.display.update()
 
             # event handler loop
@@ -241,7 +253,7 @@ class InfoPage:
                     if backHidden.collidepoint(event.pos):
                         return 0
                     if addFav.collidepoint(event.pos):
-                        self.writeFile(self.stockToDisplay)
+                        self.verState = self.writeFile(self.stockToDisplay)                        
 
                 # if user typed into search bar
                 if event.type == pygame.KEYDOWN and self.insearchbar == 1:
