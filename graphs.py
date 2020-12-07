@@ -41,6 +41,14 @@ def readTableClose(stock):
     df = df.reindex(index=df.index[::-1])
     return df
 
+def readTableDate(stock):
+    url = get_url(stock)
+    write_to_csv(url)
+    
+    df = pd.read_csv('output.csv', parse_dates=True, usecols = ["Date", "Close"])
+    df = df.reindex(index=df.index[::-1])
+    return df
+
 """
     closeLine(stock):
         Converts the stock data into a csv file. Then read data into a dataframe using panda. It reverses the
@@ -60,7 +68,7 @@ def closeLine(stock):
 """
 def candleStick(stock):
     df = readTable(stock)
-    return(mpf.plot(df, type='candle', style='charles', title=get_company_name(get_url(stock)), ylabel="Price", savefig="candlestick.png"))
+    return(mpf.plot(df, type='candle', style='charles', ylabel="Price", savefig="candlestick.png"))
     
 """
     def MACD(string stock):
@@ -83,3 +91,5 @@ def MACD(stock):
     plt.plot(exp3, label='Signal Line', color='#33DFFF')
     plt.legend(loc='upper left')
     return(plt.savefig("macd.png"))
+
+
