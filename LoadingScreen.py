@@ -16,45 +16,81 @@ def loadScreen(currentScreen):
     bgIMG3 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load0003.png")
     bgIMG4 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load0004.png")
     bgIMG5 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/load0005.png")
-    status=0
+    bgalt = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0000.png")
+    bgalt1 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0001.png")
+    bgalt2 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0002.png")
+    bgalt3 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0003.png")
+    bgalt4 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0004.png")
+    bgalt5 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0005.png")
+    bgalt6 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0006.png")
+    bgalt7 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0007.png")
+    bgalt8 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0008.png")
+    bgalt9 = pygame.image.load("../course-project-a8-mcm/images/loadingScreen/loaad0009.png")
+
+    # status=0
 
     # loop for loading screen and animation, runs for ~10 seconds
-    loop = tqdm(total=10, position=0, leave=False)
-    for k in range(10):
-        for temp in range(4):
-            loop.set_description("Loading...".format(k))
+    # loop = tqdm(total=10, position=0, leave=False)
+    for k in range(5):
+        for temp in range(10):
+            # loop.set_description("Loading...".format(k))
             screen.fill(0)
-            if status==0:
+            if temp==0:
                 screen.blit(bgIMG, (0,0))
+                screen.blit(bgalt,(0,0))
                 pygame.display.update()
-            elif status==1:
+            elif temp==1:
                 screen.blit(bgIMG2, (0,0))
+                screen.blit(bgalt1,(0,0))
                 pygame.display.update()
-            elif status==2:
+            elif temp==2:
                 screen.blit(bgIMG3, (0,0))
+                screen.blit(bgalt2,(0,0))
                 pygame.display.update()
-            elif status==3:
+            elif temp==3:
                 screen.blit(bgIMG4, (0,0))
+                screen.blit(bgalt3,(0,0))
                 pygame.display.update()
-            elif status==4:
+            elif temp==4:
                 screen.blit(bgIMG5, (0,0))
+                screen.blit(bgalt4,(0,0))
                 pygame.display.update()
-            print(status)
-            status+=1
-            if status>4:
-                status=0
+            elif temp==5:
+                screen.blit(bgIMG, (0,0))
+                screen.blit(bgalt5,(0,0))
+                pygame.display.update()
+            elif temp==6:
+                screen.blit(bgIMG2, (0,0))
+                screen.blit(bgalt6,(0,0))
+                pygame.display.update()
+            elif temp==7:
+                screen.blit(bgIMG3, (0,0))
+                screen.blit(bgalt7,(0,0))
+                pygame.display.update()
+            elif temp==8:
+                screen.blit(bgIMG4, (0,0))
+                screen.blit(bgalt8,(0,0))
+                pygame.display.update()
+            elif temp==9:
+                screen.blit(bgIMG5, (0,0))
+                screen.blit(bgalt9,(0,0))
+                pygame.display.update()
+            # print(status)
+            # status+=1
+            # if status>4:
+            #     status=0
             
 
             # screen.blit(logo, (5, 5))
             # screen.blit(bgIMG, (0, 0))
             
-            time.sleep(0.01)
+            time.sleep(0.02)
         # screen.blit(bgIMG2, (0, 0))
         # pygame.display.update()
         # time.sleep(0.1)
 
-        loop.update(1)
-    loop.close()
+    #     loop.update(1)
+    # loop.close()
 
 
 class MainMenu:

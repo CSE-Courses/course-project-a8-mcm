@@ -3,7 +3,7 @@ from pygame.locals import *
 from Search2 import *
 from webscrape import *
 from graphs import *
-
+import futureGraphs as fg
 """
 @Authors: Musaiyab Ali, David Forrest, Sean Brasse
 The class that displays stock information when a stock is clicked on. This will mimic
@@ -273,11 +273,11 @@ class InfoPage:
                 self.updatedStock = 0
                 if self.stockToDisplay!="":
                     candleStick(self.stockToDisplay)
-                    MACD(self.stockToDisplay)
+                    fg.futureLine(self.stockToDisplay)
                     candleStickGraph = pygame.image.load(
                         "../course-project-a8-mcm/candlestick.png")
                     mcdonaldsGraph = pygame.image.load(
-                        "../course-project-a8-mcm/macd.png")
+                        "../course-project-a8-mcm/lstm.png")
 
 
 # calls the method to run the program
