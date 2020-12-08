@@ -67,7 +67,7 @@ class MainRunner:
             "../course-project-a8-mcm/images/homepageFiles/SearchBar.png")
         # homepage tab images
         hompeageIcons = pygame.image.load(
-            "../course-project-a8-mcm/images/homepageFiles/homePageIcons.png")
+            "../course-project-a8-mcm/images/homepageFiles/homePageIcons4.png")
 
         return loadImg1, loadImg2, fillerImag, hamburgermenu, favMenu, searchbar, hompeageIcons, searchIcon
 
@@ -95,7 +95,6 @@ class MainRunner:
         fav1B = pygame.Rect(40, 350, 490, 60)
         fav2B = pygame.Rect(40, 475, 490, 60)
         fav3B = pygame.Rect(40, 600, 490, 60)
-
 
         # render delete fav buttons
         delFav1 = pygame.Rect(530, 350, 50, 60)
@@ -243,11 +242,11 @@ class MainRunner:
                 self.stockList[self.currentPage*5-2], True, [0, 0, 0])
             fifthStock = stockfont.render(
                 self.stockList[self.currentPage*5-1], True, [0, 0, 0])
-            screen.blit(firstStock, (205, 155))
-            screen.blit(secondStock, (205, 265))
-            screen.blit(thirdStock, (205, 375))
-            screen.blit(fourthStock, (205, 485))
-            screen.blit(fifthStock, (205, 595))
+            screen.blit(firstStock, (165, 128))
+            screen.blit(secondStock, (165, 245))
+            screen.blit(thirdStock, (165, 358))
+            screen.blit(fourthStock, (165, 470))
+            screen.blit(fifthStock, (165, 585))
 
             # handles page switching
             if self.currentPage < 6:
