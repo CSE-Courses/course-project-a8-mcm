@@ -6,6 +6,7 @@ Created on Mon Dec  7 16:34:20 2020
 """
 from lstm import lstmForecast, newDataFunc
 import matplotlib.pyplot as plt
+import asyncio
 
 """
     def MACD(string stock):
@@ -29,7 +30,8 @@ def MACD(stock):
     plt.legend(loc='upper left')
     return(plt.savefig("macd.png"))
 
-def futureLine(stock):
+async def futureLine(stock):
+    await asyncio.sleep(0.005)
     newData = newDataFunc(stock)
     data = lstmForecast(stock)
     old = len(newData) - 1

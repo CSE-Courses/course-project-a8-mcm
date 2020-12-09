@@ -4,6 +4,8 @@ from Search2 import *
 from webscrape import *
 from graphs import *
 import futureGraphs as fg
+import asyncio
+
 """
 @Authors: Musaiyab Ali, David Forrest, Sean Brasse
 The class that displays stock information when a stock is clicked on. This will mimic
@@ -94,7 +96,7 @@ class InfoPage:
         theFile.close()
         return 0
 
-    def infoPgInit(self):
+    async def infoPgInit(self):
 
         pygame.init()
 
@@ -150,6 +152,8 @@ class InfoPage:
             screen.fill(0)
 
             self.readFile()
+
+            #await asyncio.sleep(0.005)
 
             # renders background and menu buttons
             pygame.draw.rect(screen, [255, 0, 0], backHidden)
@@ -213,6 +217,8 @@ class InfoPage:
                 screen.blit(compName, (20, 120))
                 screen.blit(timeText, (1000, 690))
 
+            #await asyncio.sleep(0.005)
+
             # if self.hamState == 1:
             #     screen.blit(favMenu, (0, 0))
 
@@ -224,6 +230,8 @@ class InfoPage:
             elif self.verState == 0:
                 verText = verFont.render(self.stockToDisplay + " has been added to favorite list", True, [0, 0, 0])
                 screen.blit(verText, (150, 678))
+
+            #await asyncio.sleep(0.005)
 
             pygame.display.update()
 
