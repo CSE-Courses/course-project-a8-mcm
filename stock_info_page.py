@@ -286,7 +286,7 @@ class InfoPage:
                         "../course-project-a8-mcm/candlestick.png")
                     mcdonaldsGraph = pygame.image.load(
                         "../course-project-a8-mcm/macd.png")
-                    print(self.stockToDisplay + "being displayed")
+                    print(self.stockToDisplay + " being displayed")
 
 
 # calls the method to run the program
