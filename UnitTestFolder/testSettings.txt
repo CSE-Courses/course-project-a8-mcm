@@ -1,0 +1,3 @@
+fav1==
+fav2=WMT=
+fav3=CSCO=

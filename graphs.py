@@ -15,6 +15,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
+import asyncio
+
 """
     def readTable(string stock):
         Uses stock to get the url and write the data to csv. Reads all the headers and reverses the order to have newest at bottom
@@ -41,6 +43,14 @@ def readTableClose(stock):
     df = df.reindex(index=df.index[::-1])
     return df
 
+def readTableDate(stock):
+    url = get_url(stock)
+    write_to_csv(url)
+    
+    df = pd.read_csv('output.csv', parse_dates=True, usecols = ["Date", "Close"])
+    df = df.reindex(index=df.index[::-1])
+    return df
+
 """
     closeLine(stock):
         Converts the stock data into a csv file. Then read data into a dataframe using panda. It reverses the
@@ -59,8 +69,10 @@ def closeLine(stock):
         graph as a candlestick.png.
 """
 def candleStick(stock):
+    print("RUNNING AI")
+    #await asyncio.sleep(0.005)
     df = readTable(stock)
-    return(mpf.plot(df, type='candle', style='charles', title=get_company_name(get_url(stock)), ylabel="Price", savefig="candlestick.png"))
+    return(mpf.plot(df, type='candle', style='charles', ylabel="Price", savefig="candlestick.png"))
     
 """
     def MACD(string stock):
@@ -69,6 +81,8 @@ def candleStick(stock):
         buy or put. When MACD line crosses over signal line than buy else put.
 """
 def MACD(stock):
+    #await asyncio.sleep(0.005)
+    print("RUNNING AI")
     df = readTableClose(stock)
     
     exp1 = df.ewm(span=12, adjust=False).mean()
@@ -83,3 +97,5 @@ def MACD(stock):
     plt.plot(exp3, label='Signal Line', color='#33DFFF')
     plt.legend(loc='upper left')
     return(plt.savefig("macd.png"))
+
+

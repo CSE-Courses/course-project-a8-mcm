@@ -50,12 +50,14 @@ def searchBarInitalize():
     searchBarButton = pygame.Rect(198, 17, 983, 56)
     font = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 50)
     timeFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 30)
+    favFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 60)
+    verFont = pygame.font.Font("../course-project-a8-mcm/Fonts/times.ttf", 30)
     companyFont = pygame.font.Font(
         "../course-project-a8-mcm/Fonts/times.ttf", 50)
     t = time.localtime()
     currentTime = time.strftime("%H:%M:%S", t)
     updatedTime = "Stock Data Updated at " + currentTime
-    return searchBarButton, font, updatedTime, timeFont, companyFont
+    return searchBarButton, font, updatedTime, timeFont, companyFont, favFont, verFont
 
 
 """
@@ -70,10 +72,10 @@ def updateSearchBarOnKeyPress(theGuiEvent, searchBarText):
     if theGuiEvent.unicode == "\b":
         return searchBarText[:-1]
 
-    elif theGuiEvent.unicode.isalpha() and len(searchBarText) <= 10 or theGuiEvent.unicode.isdigit() and len(searchBarText) <= 10:
+    elif theGuiEvent.unicode.isalpha() and len(searchBarText) <= 5 or theGuiEvent.unicode.isdigit() and len(searchBarText) <= 5:
         return searchBarText+theGuiEvent.unicode
     else:
-        if len(searchBarText) >= 10:
+        if len(searchBarText) >= 5:
             print("max length of string reached")
 
         return searchBarText

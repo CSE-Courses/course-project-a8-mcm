@@ -22,3 +22,5 @@ it will simply open a window with the UI for the user. The UI contains the searc
 As of sprint 2, updated main menu, loading screen, refactored main code, display graphs of the stock, and have a stock information page. The graphs show the historical data of the stock. Stock with no information will not show. Loading screen will be used when certain features are taking long to show.
 
 As of sprint 3, backend for favorite menu is done, updated our main code to design specification, made a logo, new UI design through figma, updated homepage UI, align the buttons, and have a MACD graph.
+
+As of sprint 4, prediction of the stock is done, async is implemented to load features faster, favorites UI is now complete, menu UI has been updated, and search bar can now autofill.
