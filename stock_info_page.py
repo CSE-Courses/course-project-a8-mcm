@@ -144,7 +144,7 @@ class InfoPage:
 
         # favorites menu and button
         favMenu = pygame.image.load("../course-project-a8-mcm/images/homepageFiles/favorites_background.png")
-        addFav=pygame.Rect(60, 678, 50, 25)
+        addFav=pygame.Rect(70, 678, 50, 25)
 
         # screen while program is running
         while True:
@@ -217,7 +217,7 @@ class InfoPage:
                 screen.blit(compName, (20, 120))
                 screen.blit(timeText, (1000, 690))
 
-            #await asyncio.sleep(0.005)
+            await asyncio.sleep(0.0001)
 
             # if self.hamState == 1:
             #     screen.blit(favMenu, (0, 0))
@@ -281,11 +281,12 @@ class InfoPage:
                 self.updatedStock = 0
                 if self.stockToDisplay!="":
                     candleStick(self.stockToDisplay)
-                    fg.futureLine(self.stockToDisplay)
+                    MACD(self.stockToDisplay)
                     candleStickGraph = pygame.image.load(
                         "../course-project-a8-mcm/candlestick.png")
                     mcdonaldsGraph = pygame.image.load(
-                        "../course-project-a8-mcm/lstm.png")
+                        "../course-project-a8-mcm/macd.png")
+                    print(self.stockToDisplay + "being displayed")
 
 
 # calls the method to run the program

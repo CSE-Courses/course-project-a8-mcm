@@ -68,8 +68,9 @@ def closeLine(stock):
         table data to have the oldest date at the top and newest at the bottom. Then it will save the candlestick 
         graph as a candlestick.png.
 """
-async def candleStick(stock):
-    await asyncio.sleep(0.005)
+def candleStick(stock):
+    print("RUNNING AI")
+    #await asyncio.sleep(0.005)
     df = readTable(stock)
     return(mpf.plot(df, type='candle', style='charles', ylabel="Price", savefig="candlestick.png"))
     
@@ -80,6 +81,8 @@ async def candleStick(stock):
         buy or put. When MACD line crosses over signal line than buy else put.
 """
 def MACD(stock):
+    #await asyncio.sleep(0.005)
+    print("RUNNING AI")
     df = readTableClose(stock)
     
     exp1 = df.ewm(span=12, adjust=False).mean()

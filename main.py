@@ -106,7 +106,7 @@ class MainRunner:
 
     # function that reads settings file and saves the values to fav1, fav2, and fav3
     def readFile(self):
-        theFile = open("settings.txt")
+        theFile = open("../course-project-a8-mcm/settings.txt")
         lineArray = theFile.readlines()
         for line in lineArray:
             if "fav1" in line:
@@ -133,7 +133,7 @@ class MainRunner:
         elif self.fav3 == "":
             self.fav3 = str
 
-        theFile = open("settings.txt", "w")
+        theFile = open("../course-project-a8-mcm/settings.txt", "w")
         theFile.write("fav1=" + self.fav1 + "=\n")
         theFile.write("fav2=" + self.fav2 + "=\n")
         theFile.write("fav3=" + self.fav3 + "=\n")
@@ -149,7 +149,7 @@ class MainRunner:
         if str == "fav3":
             self.fav3 = ""
 
-        theFile = open("settings.txt", "w")
+        theFile = open("../course-project-a8-mcm/settings.txt", "w")
         theFile.write("fav1=" + self.fav1 + "=\n")
         theFile.write("fav2=" + self.fav2 + "=\n")
         theFile.write("fav3=" + self.fav3 + "=\n")
@@ -371,7 +371,7 @@ class MainRunner:
                     if self.hamState == 0:
                         # handle opening the info page when clicking on the stock
                         if stock1.collidepoint(event.pos):
-                            print("CLICKED")
+                            print("CLICKED STOCK")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-5])
@@ -379,7 +379,7 @@ class MainRunner:
                             task = loop.create_task(newPage.infoPgInit())
                             await asyncio.wait([loadTask, task])
                         if stock2.collidepoint(event.pos):
-                            print("CLICKED")
+                            print("CLICKED STOCK")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-4])
@@ -387,7 +387,7 @@ class MainRunner:
                             task = loop.create_task(newPage.infoPgInit())
                             await asyncio.wait([loadTask, task])
                         if stock3.collidepoint(event.pos):
-                            print("CLICKED")
+                            print("CLICKED STOCK")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-3])
@@ -395,7 +395,7 @@ class MainRunner:
                             task = loop.create_task(newPage.infoPgInit())
                             await asyncio.wait([loadTask, task])
                         if stock4.collidepoint(event.pos):
-                            print("CLICKED")
+                            print("CLICKED STOCK")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-2])
@@ -403,7 +403,7 @@ class MainRunner:
                             task = loop.create_task(newPage.infoPgInit())
                             await asyncio.wait([loadTask, task])
                         if stock5.collidepoint(event.pos):
-                            print("CLICKED")
+                            print("CLICKED STOCK")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-1])
@@ -524,8 +524,8 @@ class MainRunner:
                         for stockName in self.stockList:
                            # print(stockName)
                             if self.searchbarText.upper() in stockName:
-                                print(
-                                    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                               # print(
+                                #    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
                                 self.autoFill = stockName
                                 break
 
