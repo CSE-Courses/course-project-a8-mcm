@@ -3,6 +3,7 @@ from pygame.locals import *
 from stock_info_page import*
 from Search import *
 from LoadingScreen import *
+import asyncio
 
 
 """
@@ -76,11 +77,11 @@ class MainRunner:
         hamHidden = pygame.Rect(0, 0, 100, 100)
 
         # render buttons for stocks
-        stock1 = pygame.Rect(200, 145, 975, 50)
-        stock2 = pygame.Rect(200, 240, 975, 70)
-        stock3 = pygame.Rect(200, 355, 975, 65)
-        stock4 = pygame.Rect(200, 470, 975, 60)
-        stock5 = pygame.Rect(200, 580, 975, 60)
+        stock1 = pygame.Rect(150, 120, 1100, 70)
+        stock2 = pygame.Rect(150, 230, 1100, 70)
+        stock3 = pygame.Rect(150, 345, 1100, 70)
+        stock4 = pygame.Rect(150, 460, 1100, 70)
+        stock5 = pygame.Rect(150, 570, 1100, 70)
 
         # render buttons for switching between pages
         goback = pygame.Rect(20, 670, 30, 20)
@@ -162,7 +163,7 @@ class MainRunner:
             "../course-project-a8-mcm/Fonts/times.ttf", 40)
         return pagenumber, stockfont
 
-    def mainScreen(self):
+    async def mainScreen(self):
 
         pygame.init()
 
@@ -183,7 +184,7 @@ class MainRunner:
         searchBarButton = pygame.Rect(198, 17, 983, 56)
        # calls method to initalize fonts
         pagenumber, stockfont = self.fontInit()
-        loadScreen(screen)
+        #loadScreen(screen)
 
         autoFillFont = pygame.font.Font(
             "../course-project-a8-mcm/Fonts/times.ttf", 50)
@@ -196,13 +197,15 @@ class MainRunner:
             # update fav variables by reading file
             self.readFile()
 
-            # renders all of the hidden buttons
+            #update event loop
+            self.loop = asyncio.get_event_loop()
 
+            # renders all of the hidden buttons *********************
             pygame.draw.rect(screen, [225, 225, 225], stock1)
             pygame.draw.rect(screen, [225, 225, 225], stock2)
             pygame.draw.rect(screen, [0, 0, 0], stock3)
             pygame.draw.rect(screen, [0, 0, 0], stock4)
-            pygame.draw.rect(screen, [0, 0, 0], stock5)
+            pygame.draw.rect(screen, [0, 0, 0], stock5)            
 
             # renders background and menu buttons
             screen.blit(fillerImag, (0, 0))
@@ -352,6 +355,10 @@ class MainRunner:
 
             # event handler loop
             for event in pygame.event.get():
+
+                #initialize event loop for async
+                #loop = asyncio.get_event_loop()
+
                 # clicking X on window
                 if event.type == pygame.QUIT:
                     print("Exiting Window")
@@ -364,33 +371,47 @@ class MainRunner:
                     if self.hamState == 0:
                         # handle opening the info page when clicking on the stock
                         if stock1.collidepoint(event.pos):
+                            print("CLICKED")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-5])
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if stock2.collidepoint(event.pos):
+                            print("CLICKED")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-4])
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if stock3.collidepoint(event.pos):
+                            print("CLICKED")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-3])
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if stock4.collidepoint(event.pos):
+                            print("CLICKED")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-2])
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if stock5.collidepoint(event.pos):
+                            print("CLICKED")
                             newPage = InfoPage()
                             newPage.setStock(
                                 self.stockList[self.currentPage*5-1])
-                            newPage.infoPgInit()
-
-                            # handles tabing between pages
-
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
+                                                    
+                        # handles tabing between pages
                         if goback.collidepoint(pos) and self.currentPage > 1:
                             self.currentPage -= 1
                             self.didPageChange = True
@@ -443,15 +464,21 @@ class MainRunner:
                         if fav1B.collidepoint(event.pos) and self.fav1 != "":
                             newPage = InfoPage()
                             newPage.setStock(self.fav1)
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if fav2B.collidepoint(event.pos) and self.fav2 != "":
                             newPage = InfoPage()
                             newPage.setStock(self.fav2)
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if fav3B.collidepoint(event.pos) and self.fav3 != "":
                             newPage = InfoPage()
                             newPage.setStock(self.fav3)
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                         if delFav1.collidepoint(event.pos):
                             self.delFav("fav1")
                         if delFav2.collidepoint(event.pos):
@@ -475,14 +502,18 @@ class MainRunner:
                         if search(self.searchbarText):
                             newPage = InfoPage()
                             newPage.setStock(self.searchbarText)
-                            newPage.infoPgInit()
+                            loadTask = loop.create_task(loadScreen(screen))
+                            task = loop.create_task(newPage.infoPgInit())
+                            await asyncio.wait([loadTask, task])
                             self.searchbarText = ""
                             self.autoFill = ""
                             self.updatedTimeText = timeStamp()
                     elif event.unicode == "\t":
                         newPage = InfoPage()
                         newPage.setStock(self.autoFill)
-                        newPage.infoPgInit()
+                        loadTask = loop.create_task(loadScreen(screen))
+                        task = loop.create_task(newPage.infoPgInit())
+                        await asyncio.wait([loadTask, task])
                         self.searchbarText = ""
                         self.autoFill = ""
                         self.updatedTimeText = timeStamp()
@@ -501,4 +532,10 @@ class MainRunner:
 
 test = MainRunner()
 test.readFile()
-test.mainScreen()
+try:
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(test.mainScreen())
+except Exception as e:
+    pass
+finally:
+    loop.close()

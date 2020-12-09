@@ -3,11 +3,12 @@ import time
 from pygame.locals import *
 from tqdm import *
 from Search import *
+import asyncio
 
 # method for running the loading screen/transition screen
 
 
-def loadScreen(currentScreen):
+async def loadScreen(currentScreen):
     # declaring screen, and images used
     # pygame.init()
     screen = currentScreen
@@ -84,7 +85,8 @@ def loadScreen(currentScreen):
             # screen.blit(logo, (5, 5))
             # screen.blit(bgIMG, (0, 0))
             
-            time.sleep(0.02)
+            #time.sleep(0.02)
+            await asyncio.sleep(0.001)
         # screen.blit(bgIMG2, (0, 0))
         # pygame.display.update()
         # time.sleep(0.1)

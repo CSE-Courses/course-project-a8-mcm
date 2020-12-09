@@ -15,6 +15,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
+import asyncio
+
 """
     def readTable(string stock):
         Uses stock to get the url and write the data to csv. Reads all the headers and reverses the order to have newest at bottom
@@ -66,7 +68,8 @@ def closeLine(stock):
         table data to have the oldest date at the top and newest at the bottom. Then it will save the candlestick 
         graph as a candlestick.png.
 """
-def candleStick(stock):
+async def candleStick(stock):
+    await asyncio.sleep(0.005)
     df = readTable(stock)
     return(mpf.plot(df, type='candle', style='charles', ylabel="Price", savefig="candlestick.png"))
     
