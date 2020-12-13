@@ -498,7 +498,6 @@ class MainRunner:
 
                 # if user typed into search bar
                 if event.type == pygame.KEYDOWN and self.insearchbar == 1:
-                    print(event.unicode)
                     if event.key == K_RETURN:
                         if search(self.searchbarText):
                             newPage = InfoPage()
