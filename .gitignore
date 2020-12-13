@@ -1,4 +1,7 @@
+settings.txt
 *.csv
 *.pyc
 *.png
 !**/__pycache__/
+env/
+.vscode/

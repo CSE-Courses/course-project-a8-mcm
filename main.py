@@ -498,7 +498,8 @@ class MainRunner:
 
                 # if user typed into search bar
                 if event.type == pygame.KEYDOWN and self.insearchbar == 1:
-                    if event.unicode == "\r":
+                    print(event.unicode)
+                    if event.key == K_RETURN:
                         if search(self.searchbarText):
                             newPage = InfoPage()
                             newPage.setStock(self.searchbarText)
@@ -508,7 +509,7 @@ class MainRunner:
                             self.searchbarText = ""
                             self.autoFill = ""
                             self.updatedTimeText = timeStamp()
-                    elif event.unicode == "\t":
+                    elif event.key == K_TAB:
                         newPage = InfoPage()
                         newPage.setStock(self.autoFill)
                         loadTask = loop.create_task(loadScreen(screen))
@@ -532,10 +533,10 @@ class MainRunner:
 
 test = MainRunner()
 test.readFile()
+loop = asyncio.get_event_loop()
 try:
-    loop = asyncio.get_event_loop()
     loop.run_until_complete(test.mainScreen())
 except Exception as e:
-    pass
+    print(e)
 finally:
     loop.close()

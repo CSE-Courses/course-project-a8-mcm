@@ -69,7 +69,7 @@ Otherwise will add char to the search bar text
 
 
 def updateSearchBarOnKeyPress(theGuiEvent, searchBarText):
-    if theGuiEvent.unicode == "\b":
+    if theGuiEvent.key == K_BACKSPACE:
         return searchBarText[:-1]
 
     elif theGuiEvent.unicode.isalpha() and len(searchBarText) <= 5 or theGuiEvent.unicode.isdigit() and len(searchBarText) <= 5:
